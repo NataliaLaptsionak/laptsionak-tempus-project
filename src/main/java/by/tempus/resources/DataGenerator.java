@@ -1,6 +1,7 @@
 package by.tempus.resources;
 
 import org.apache.commons.lang3.RandomStringUtils;
+
 import java.util.Random;
 
 public class DataGenerator {
@@ -33,6 +34,12 @@ public class DataGenerator {
         return "+375" + operatorCode + subscriberNumber;
     }
 
+    public static String generateInvalidBelarusianPhoneNumber() {
+        String operatorCode = String.format("%02d", random.nextInt(3) == 0 ? 28 : (random.nextInt(2) == 0 ? 31 : 45));
+        String subscriberNumber = RandomStringUtils.randomNumeric(5);
+        return "+375" + operatorCode + subscriberNumber;
+    }
+
     public static String generateValidFullName() {
         return "Тест Тестович Тестовый";
     }
@@ -41,7 +48,15 @@ public class DataGenerator {
         return RandomStringUtils.randomAlphanumeric(10);
     }
 
+    public static String generateInvalidPassword() {
+        return "123";
+    }
+
     public static String generateValidRepeatPassword() {
         return "Password-1";
+    }
+
+    public static String generateInvalidRepeatPassword() {
+        return "Password-2";
     }
 }
