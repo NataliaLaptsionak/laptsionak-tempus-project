@@ -3,7 +3,6 @@ package by.tempus.ui;
 import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.login.form.LoginExpectedMessages;
 import by.tempus.ui.login.form.LoginForm;
-import by.tempus.ui.registration.form.RegistrationExpectedMessages;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
