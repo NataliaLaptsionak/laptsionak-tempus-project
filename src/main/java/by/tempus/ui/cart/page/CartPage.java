@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class CartPage {
@@ -53,7 +54,10 @@ public class CartPage {
     }
 
     public void clearCart() {
-        WebDriver.clickElement(CartPageLocators.CLEAR_CART_BUTTON);
+        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.CLEAR_CART_BUTTON)));
+        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 
     public void fillCheckoutForm(String fullName, String email, String phone) {
@@ -70,7 +74,10 @@ public class CartPage {
     }
 
     public void clickGoToCatalogFromEmptyCart() {
-        WebDriver.clickElement(CartPageLocators.GO_TO_CATALOG_BUTTON_FROM_EMPTY_CART);
+        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.GO_TO_CATALOG_BUTTON_FROM_EMPTY_CART)));
+        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 
     public int getCartItemCount() {

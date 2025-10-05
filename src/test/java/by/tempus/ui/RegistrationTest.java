@@ -4,15 +4,19 @@ import by.tempus.resources.DataGenerator;
 import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.registration.form.RegistrationExpectedMessages;
 import by.tempus.ui.registration.form.RegistrationForm;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Epic("UI Testing")
+@Feature("Registration Form")
 public class RegistrationTest extends BaseTest {
     RegistrationForm registrationForm = new RegistrationForm();
 
     @BeforeEach
+    @Step("Setup Registration Form")
     public void setupRegistrationForm() {
         new HomePage()
                 .openSite()
@@ -21,6 +25,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of the registration form title.")
+    @Story("Registration Form Structure")
+    @Description("Checks that the registration form displays the correct title.")
+    @Severity(SeverityLevel.TRIVIAL)
     public void verifyRegistrationFormTitle() {
         registrationForm.clickTabRegistration();
 
@@ -29,6 +36,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of fields presence on the registration form.")
+    @Story("Registration Form Structure")
+    @Description("Checks that all required fields are present on the registration form.")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyLRegistrationFormFields() {
         registrationForm.clickTabRegistration();
 
@@ -44,6 +54,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error messages for empty required fields.")
+    @Story("Form Validation")
+    @Description("Tests that error messages are displayed for all empty required fields upon registration attempt.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessagesForEmptyRegistrationFields() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -57,6 +70,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Full name' field.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the 'Full name' field is left empty.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyFullNameField() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -70,6 +86,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Email' field.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the 'Email' field is left empty.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyField() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -86,6 +105,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Phone' field.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the 'Phone' field is left empty.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyPhone() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -102,6 +124,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Password' field.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the 'Password' field is left empty.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyPassword() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -118,6 +143,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Repeat Password' field.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the 'Repeat password' field is left empty.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyRepeatPassword() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -134,6 +162,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Checkbox'.")
+    @Story("Form Validation")
+    @Description("Verifies the error message when the agreement checkbox is not checked.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyCheckbox() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -150,6 +181,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing part before '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the part before the '@' symbol.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartBeforeAtTest() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -164,6 +198,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing part after '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the part after the '@' symbol.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
         registrationForm.clickTabRegistration();
 
@@ -177,6 +214,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email address (e.g., '1@rtty')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for a completely malformed email address.")
+    @Severity(SeverityLevel.NORMAL)
     public void incorrectEmailAddressTest() {
         registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
@@ -193,6 +233,9 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the '@' symbol.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingAtTest() {
         registrationForm.clickTabRegistration();
 

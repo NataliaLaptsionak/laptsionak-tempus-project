@@ -7,6 +7,7 @@ import by.tempus.ui.login.form.LoginForm;
 import by.tempus.ui.registration.form.RegistrationExpectedMessages;
 import by.tempus.ui.restore.password.form.RestorePasswordExpectedMessages;
 import by.tempus.ui.restore.password.form.RestorePasswordForm;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,11 +15,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Epic("UI Testing")
+@Feature("Restore Password Form")
 public class RestorePasswordTest extends BaseTest {
     LoginForm loginForm = new LoginForm();
     RestorePasswordForm restorePasswordForm = new RestorePasswordForm();
 
     @BeforeEach
+    @Step("Setup Restore Password Form")
     public void openHomePageClickButtonLogIn() {
         new HomePage()
                 .openSite()
@@ -27,6 +31,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of redirection to restore password form form.")
+    @Story("Navigation")
+    @Description("Checks that clicking the 'Restore password' link navigates to the restore password form.")
+    @Severity(SeverityLevel.CRITICAL)
     void RestorePasswordFormRedirectionTest() {
         loginForm.clickRestorePasswordLink();
 
@@ -35,6 +42,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of elements presence on the restore password form.")
+    @Story("Form Structure")
+    @Description("Checks that essential elements like titles, labels, and buttons are present on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyRestorePasswordFormFields() {
         loginForm.clickRestorePasswordLink();
 
@@ -47,6 +57,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for empty 'Email' field.")
+    @Story("Form Validation")
+    @Description("Tests that an error message is displayed when the 'Email' field is left empty on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyEmailField() {
         loginForm.clickRestorePasswordLink();
         restorePasswordForm.clickButtonSubmitRestore();
@@ -56,6 +69,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the '@' symbol on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingAtTest() {
         loginForm.clickRestorePasswordLink();
 
@@ -69,6 +85,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing part before '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the part before the '@' symbol on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartBeforeAtTest() {
         loginForm.clickRestorePasswordLink();
         RestorePasswordForm restorePasswordForm = new RestorePasswordForm();
@@ -83,6 +102,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email format (missing part after '@')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for an email missing the part after the '@' symbol on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
         loginForm.clickRestorePasswordLink();
 
@@ -96,6 +118,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verify message for incorrect email address (e.g., '1@rtty')")
+    @Story("Form Validation")
+    @Description("Tests that an error message is shown for a completely malformed email address on the restore password form.")
+    @Severity(SeverityLevel.NORMAL)
     public void incorrectEmailAddressTest() {
         loginForm.clickRestorePasswordLink();
 
@@ -108,6 +133,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of error message for unregistered email.")
+    @Story("Form Validation")
+    @Description("Tests that an error message is displayed when attempting to restore password for an unregistered email address.")
+    @Severity(SeverityLevel.NORMAL)
     public void UnregisteredEmailTest() {
         loginForm.clickRestorePasswordLink();
 
@@ -119,6 +147,9 @@ public class RestorePasswordTest extends BaseTest {
 
     @Test
     @DisplayName("Verification of redirection to registration form. Проверка перехода в форму регистрации")
+    @Story("Navigation")
+    @Description("Checks that there is a link to navigate to the registration form from the restore password screen, and verifies the title of the registration form.")
+    @Severity(SeverityLevel.TRIVIAL)
     public void RegistrationFormRedirectionTest() {
         loginForm.clickRestorePasswordLink();
         restorePasswordForm.clickTabRegistration();
