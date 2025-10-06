@@ -4,7 +4,6 @@ import by.tempus.resources.DataGenerator;
 import by.tempus.ui.cart.page.CartPage;
 import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.cart.page.CartPageExpectedMessages;
-import by.tempus.web.driver.WebDriver;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
