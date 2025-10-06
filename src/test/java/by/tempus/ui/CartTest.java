@@ -32,6 +32,7 @@ public class CartTest extends BaseTest {
     @DisplayName("Verify empty cart display")
     public void viewEmptyCartTest() {
         cartPage.openCart();
+
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
     }
 
@@ -50,6 +51,7 @@ public class CartTest extends BaseTest {
         cartPage.selectSecondMichaelKorsWatch();
         cartPage.clickAddToCart();
         cartPage.openCart();
+
         Assertions.assertEquals(2, cartPage.getCartItemCount());
     }
 
@@ -65,14 +67,17 @@ public class CartTest extends BaseTest {
         cartPage.selectFirstMichaelKorsWatch();
         cartPage.clickAddToCart();
         cartPage.openCart();
+
         Assertions.assertEquals("1", cartPage.getItemQuantity());
 
         cartPage.increaseQuantity();
         sleep(1000);
+
         Assertions.assertEquals("2", cartPage.getItemQuantity());
 
         cartPage.decreaseQuantity();
         sleep(1000);
+
         Assertions.assertEquals("1", cartPage.getItemQuantity());
     }
 
@@ -89,6 +94,7 @@ public class CartTest extends BaseTest {
         cartPage.openCart();
         cartPage.clearCart();
         cartPage.openCart();
+
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
     }
 
@@ -106,6 +112,7 @@ public class CartTest extends BaseTest {
         cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateIncorrectEmail(), DataGenerator.generateValidPassword());
         cartPage.selectCityMinsk();
         cartPage.clickPlaceOrderButton();
+
         Assertions.assertEquals(CartPageExpectedMessages.INVALID_EMAIL_ERROR, cartPage.getIncorrectEmailErrorMessage());
     }
 
@@ -123,6 +130,7 @@ public class CartTest extends BaseTest {
         cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), "");
         cartPage.selectCityMinsk();
         cartPage.clickPlaceOrderButton();
+
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_PHONE_FIELD_ERROR, cartPage.getEmptyPhoneErrorMessage(), "");
     }
 }

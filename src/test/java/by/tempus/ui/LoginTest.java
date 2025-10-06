@@ -163,6 +163,7 @@ public class LoginTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     public void RestorePasswordFormRedirectionTest() {
         loginForm.clickRestorePasswordLink();
+
         Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_TEXT, loginForm.getRestorePasswordFormTitleText());
     }
 

@@ -74,7 +74,6 @@ public class RestorePasswordTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingAtTest() {
         loginForm.clickRestorePasswordLink();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -91,7 +90,6 @@ public class RestorePasswordTest extends BaseTest {
     public void invalidEmailFormatMissingPartBeforeAtTest() {
         loginForm.clickRestorePasswordLink();
         RestorePasswordForm restorePasswordForm = new RestorePasswordForm();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartBeforeAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -107,7 +105,6 @@ public class RestorePasswordTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
         loginForm.clickRestorePasswordLink();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartAfterAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -123,7 +120,6 @@ public class RestorePasswordTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void incorrectEmailAddressTest() {
         loginForm.clickRestorePasswordLink();
-
         String invalidEmail = DataGenerator.generateIncorrectEmail();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -138,7 +134,6 @@ public class RestorePasswordTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void UnregisteredEmailTest() {
         loginForm.clickRestorePasswordLink();
-
         restorePasswordForm.sendKeysEmail(DataGenerator.generateValidEmail());
         restorePasswordForm.clickButtonSubmitRestore();
 

@@ -11,7 +11,6 @@ public class RegistrationLocators {
     public static final String EMPTY_FULL_NAME_ERROR = "//label[@class=\"form-input is-required is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String EMPTY_EMAIL_ERROR = "//label[@class=\"form-input is-required is-email is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String INCORRECT_EMAIL_ERROR = "//span[@class=\"form-input__error-message\"]";
-    public static final String INCORRECT_REPEAT_PASSWORD_TEXT = "(//span[@class=\"form-input__error-message\"])[3]";
     public static final String EMPTY_PHONE_ERROR = "//label[@class=\"form-input is-required is-phone phone-input is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String EMPTY_PASSWORD_ERROR = "//label[@class=\"form-input is-required is-password is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String REGISTRATION_REPEAT_PASSWORD_ERROR = "//label[@class=\"form-input is-required is-confirm-password is-error\"]//span[@class=\"form-input__error-message\"]";

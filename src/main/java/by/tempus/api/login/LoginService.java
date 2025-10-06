@@ -32,10 +32,10 @@ public class LoginService {
         formParam.put("password", password);
         return formParam;
     }
+
     public static Map<String, String> getQueryParams() {
         Map<String, String> queryParams = new HashMap<>();
         queryParams.put("action", "imedia:main.api.Auth.loginByEmail");
         return queryParams;
     }
 }
-

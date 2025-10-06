@@ -29,6 +29,7 @@ public class SearchTest extends BaseTest {
     public void validFullSearchTest() {
         String searchQuery = "Emporio Armani Sports AR2460";
         searchPage.searchFor(searchQuery);
+
         Assertions.assertTrue(searchPage.getSpecificSearchResultText(SearchFormExpectedMessages.FULL_SEARCH_RESULT)
                 .contains(SearchFormExpectedMessages.FULL_SEARCH_RESULT), "Full search result not found.");
     }
@@ -41,6 +42,7 @@ public class SearchTest extends BaseTest {
     public void validPartialSearchTest() {
         String partialSearchQuery = "Emporio";
         searchPage.searchFor(partialSearchQuery);
+
         Assertions.assertTrue(searchPage.getFirstSearchResultText().contains(partialSearchQuery),
                 "Expected partial search result to contain: " + partialSearchQuery);
     }
@@ -53,6 +55,7 @@ public class SearchTest extends BaseTest {
     public void invalidSearchTest() {
         String incorrectSearchQuery = "someinvalidquerry12345";
         searchPage.searchFor(incorrectSearchQuery);
+
         Assertions.assertTrue(searchPage.getNoResultsMessageText()
                 .contains(SearchFormExpectedMessages.NO_RESULTS_MESSAGE), "Invalid search message not displayed.");
     }
