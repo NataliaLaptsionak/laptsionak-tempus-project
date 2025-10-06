@@ -98,6 +98,7 @@ public class CartPage {
     }
 
     public void clickPlaceOrderButton() {
+        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(CartPageLocators.PLACE_ORDER_BUTTON)));
         WebDriver.clickElement(CartPageLocators.PLACE_ORDER_BUTTON);
     }
 

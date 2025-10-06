@@ -14,7 +14,6 @@ public class CartPageLocators {
     public static final String CART_ITEMS_LIST = "//span[@class='icons__counter icons__counter--cart']";
     public static final String ITEM_QUANTITY_INPUT = "//input[@class='cart-item-counter__field h6']";
     public static final String EMPTY_CART_MESSAGE = "//div[@class='empty-cart']";
-    public static final String GO_TO_CATALOG_BUTTON_FROM_EMPTY_CART = "//a[@class='catalog-button']";
     public static final String FULL_NAME_INPUT = "//input[@id='ORDER_PROP_19']";
     public static final String EMAIL_INPUT = "//input[@id='ORDER_PROP_20']";
     public static final String PHONE_INPUT = "//input[@id='ORDER_PROP_21']";
