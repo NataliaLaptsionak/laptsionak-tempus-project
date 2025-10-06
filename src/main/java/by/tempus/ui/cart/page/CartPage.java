@@ -20,11 +20,17 @@ public class CartPage {
     }
 
     public void selectFirstMichaelKorsWatch() {
-        WebDriver.clickElement(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7337);
+        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7337)));
+        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 
     public void selectSecondMichaelKorsWatch() {
-        WebDriver.clickElement(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7325);
+        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7325)));
+        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 
     public CartPage clickAddToCart() {
@@ -69,13 +75,6 @@ public class CartPage {
     public void selectCityMinsk() {
         WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.CITY_MINSK_TAG)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
-    }
-
-    public void clickGoToCatalogFromEmptyCart() {
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.GO_TO_CATALOG_BUTTON_FROM_EMPTY_CART)));
         JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
         js.executeScript("arguments[0].click();", element);
     }

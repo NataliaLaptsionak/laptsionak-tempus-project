@@ -146,7 +146,7 @@ public class RestorePasswordTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Verification of redirection to registration form. Проверка перехода в форму регистрации")
+    @DisplayName("Verification of redirection to registration form.")
     @Story("Navigation")
     @Description("Checks that there is a link to navigate to the registration form from the restore password screen, and verifies the title of the registration form.")
     @Severity(SeverityLevel.TRIVIAL)

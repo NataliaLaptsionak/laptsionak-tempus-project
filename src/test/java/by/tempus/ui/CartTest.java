@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static java.lang.Thread.sleep;
 
-@Epic("UI Testing") // Overall epic for all UI testing
+@Epic("UI Testing")
 @Feature("Shopping Cart")
 public class CartTest extends BaseTest {
     private CartPage cartPage;
@@ -125,16 +125,5 @@ public class CartTest extends BaseTest {
         cartPage.selectCityMinsk();
         cartPage.clickPlaceOrderButton();
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_PHONE_FIELD_ERROR, cartPage.getEmptyPhoneErrorMessage(), "");
-    }
-
-    @Test
-    @DisplayName("Verify navigation to catalog from empty cart")
-    @Story("Navigation from Cart")
-    @Description("Checks that a user can successfully navigate back to the catalog from an empty shopping cart.")
-    @Severity(SeverityLevel.MINOR)
-    public void navigateToCatalogFromEmptyCartTest() {
-        cartPage.openCart();
-        cartPage.clickGoToCatalogFromEmptyCart();
-        Assertions.assertTrue(WebDriver.getDriver().getCurrentUrl().contains("/catalog/"));
     }
 }

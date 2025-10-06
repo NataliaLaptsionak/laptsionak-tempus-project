@@ -1,6 +1,7 @@
 package by.tempus.ui.search.form;
 
 import by.tempus.web.driver.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchForm {
 
@@ -9,6 +10,7 @@ public class SearchForm {
     }
 
     public void clickSearchButton() {
+        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(SearchFormLocators.BUTTON_SEARCH)));
         WebDriver.clickElement(SearchFormLocators.BUTTON_SEARCH);
     }
 

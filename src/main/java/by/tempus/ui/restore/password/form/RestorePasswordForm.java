@@ -16,7 +16,7 @@ public class RestorePasswordForm {
     }
 
     public void clickButtonSubmitRestore() {
-        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(RestorePasswordFormLocators.INPUT_RESTORE_PASSWORD_EMAIL)));
+        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(RestorePasswordFormLocators.BUTTON_SUBMIT_RESTORE)));
         WebDriver.clickElement(RestorePasswordFormLocators.BUTTON_SUBMIT_RESTORE);
     }
 
@@ -51,6 +51,7 @@ public class RestorePasswordForm {
     }
 
     public void clickTabRegistration() {
+        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(RestorePasswordFormLocators.TAB_REGISTRATION)));
         WebDriver.clickElement(RestorePasswordFormLocators.TAB_REGISTRATION);
     }
 }
