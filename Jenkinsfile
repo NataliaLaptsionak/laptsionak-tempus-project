@@ -3,7 +3,7 @@ ppipeline {
      stages {
          stage('Checkout') {
              steps {
-                 git branch: 'main', credentialsId: 'github-pat-laptsionak', url: 'https://github.com/NataliaLaptsionak/laptsionak-tempus-project.git'
+                 git branch: 'master', credentialsId: 'github-pat-laptsionak', url: 'https://github.com/NataliaLaptsionak/laptsionak-tempus-project.git'
              }
          }
         stage('Build') {
