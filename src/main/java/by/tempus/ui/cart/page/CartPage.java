@@ -99,7 +99,9 @@ public class CartPage {
 
     public void clickPlaceOrderButton() {
         WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(CartPageLocators.PLACE_ORDER_BUTTON)));
-        WebDriver.clickElement(CartPageLocators.PLACE_ORDER_BUTTON);
+        WebElement element = WebDriver.findElement(CartPageLocators.PLACE_ORDER_BUTTON);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
+        js.executeScript("arguments[0].click();", element);
     }
 
     public String getIncorrectEmailErrorMessage() {

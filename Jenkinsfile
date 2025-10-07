@@ -1,11 +1,11 @@
-pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'master', url: 'https://github.com/NataliiaLaptisionak/laptisionak-tempus-project'
-            }
-        }
+ppipeline {
+     agent any
+     stages {
+         stage('Checkout') {
+             steps {
+                 git branch: 'main', credentialsId: 'github-pat-laptsionak', url: 'https://github.com/NataliaLaptsionak/laptsionak-tempus-project.git'
+             }
+         }
         stage('Build') {
             steps {
                 echo 'Building the project...'
