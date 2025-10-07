@@ -1,7 +1,7 @@
 package by.tempus.api.registration;
 
 import by.tempus.api.ExpectedMessages;
-import by.tempus.resources.DataGenerator;
+import by.tempus.utils.DataGenerator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

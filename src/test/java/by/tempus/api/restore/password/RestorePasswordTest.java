@@ -1,7 +1,7 @@
 package by.tempus.api.restore.password;
 
 import by.tempus.api.ExpectedMessages;
-import by.tempus.resources.DataGenerator;
+import by.tempus.utils.DataGenerator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

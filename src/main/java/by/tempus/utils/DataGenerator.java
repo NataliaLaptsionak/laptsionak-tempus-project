@@ -1,4 +1,4 @@
-package by.tempus.resources;
+package by.tempus.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

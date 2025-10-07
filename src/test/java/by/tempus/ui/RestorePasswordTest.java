@@ -1,6 +1,6 @@
 package by.tempus.ui;
 
-import by.tempus.resources.DataGenerator;
+import by.tempus.utils.DataGenerator;
 import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.login.form.LoginExpectedMessages;
 import by.tempus.ui.login.form.LoginForm;

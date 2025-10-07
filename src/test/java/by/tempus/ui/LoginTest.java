@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import by.tempus.resources.DataGenerator;
+import by.tempus.utils.DataGenerator;
 
 @Epic("UI Testing")
 @Feature("Login Form")

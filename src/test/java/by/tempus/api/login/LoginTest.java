@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import by.tempus.resources.DataGenerator;
+import by.tempus.utils.DataGenerator;
 
 @Epic("API Testing")
 @Feature("Authentication")
