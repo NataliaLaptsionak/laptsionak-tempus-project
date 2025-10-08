@@ -88,23 +88,6 @@ public class CartPage {
         logger.debug("Кнопка 'Очистить корзину' нажата.");
     }
 
-    public void fillCheckoutForm(String fullName, String email, String phone) {
-        logger.info("Заполнение формы оформления заказа с данными: fullName='{}', email='{}', phone='{}'", fullName, email, phone);
-        WebDriver.sendkeysToElement(CartPageLocators.FULL_NAME_INPUT, fullName);
-        WebDriver.sendkeysToElement(CartPageLocators.EMAIL_INPUT, email);
-        WebDriver.sendkeysToElement(CartPageLocators.PHONE_INPUT, phone);
-        logger.debug("Форма оформления заказа заполнена.");
-    }
-
-    public void selectCityMinsk() {
-        logger.info("Выбор города.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.CITY_MINSK_TAG)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
-        logger.debug("Город выбран.");
-    }
-
     public int getCartItemCount() {
         logger.info("Получение количества товаров в корзине.");
         WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(10));
@@ -125,22 +108,5 @@ public class CartPage {
     public String getEmptyCartMessageText() {
         logger.info("Получение сообщения о пустой корзине.");
         return WebDriver.getTextFromElement(CartPageLocators.EMPTY_CART_MESSAGE);
-    }
-
-    public void clickPlaceOrderButton() {
-        logger.info("Нажатие на кнопку 'Оформить заказ'.");
-        WebDriver.wait.until(ExpectedConditions.elementToBeClickable(WebDriver.findElement(CartPageLocators.PLACE_ORDER_BUTTON)));
-        WebDriver.clickElement(CartPageLocators.PLACE_ORDER_BUTTON);
-        logger.debug("Кнопка 'Оформить заказ' нажата.");
-    }
-
-    public String getIncorrectEmailErrorMessage() {
-        logger.info("Получение сообщения о некорректном Email.");
-        return WebDriver.getTextFromElement(CartPageLocators.INCORRECT_EMAIL_CART_ERROR_MESSAGE);
-    }
-
-    public String getEmptyPhoneErrorMessage() {
-        logger.info("Получение сообщения о пустом номере телефона.");
-        return WebDriver.getTextFromElement(CartPageLocators.EMPTY_PHONE_CART_ERROR_MESSAGE);
     }
 }
