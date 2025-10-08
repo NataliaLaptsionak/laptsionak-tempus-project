@@ -3,10 +3,8 @@ package by.tempus.api.restore.password;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 
 public class RestorePasswordService {
@@ -25,7 +23,6 @@ public class RestorePasswordService {
                 .when()
                 .post(URL);
         logger.info("Получен ответ от API восстановления пароля. Статус код: " + response.getStatusCode());
-
     }
 
     public int getStatusCode() {
