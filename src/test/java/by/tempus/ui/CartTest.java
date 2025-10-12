@@ -42,7 +42,7 @@ public class CartTest extends BaseTest {
         cartPage.clickWomenCategory();
         cartPage.selectFirstMichaelKorsWatch();
         cartPage.clickAddToCart();
-        cartPage.clickAddToCart().clickWatchButton();
+        cartPage.clickWatchButton();
         cartPage.clickWomenCategory();
         cartPage.selectSecondMichaelKorsWatch();
         cartPage.clickAddToCart();

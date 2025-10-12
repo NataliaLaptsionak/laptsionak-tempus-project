@@ -11,24 +11,24 @@ import org.junit.jupiter.api.Test;
 @Epic("UI Testing")
 @Feature("Search Functionality")
 public class SearchTest extends BaseTest {
-    private SearchForm searchPage;
+    private SearchForm searchForm;
 
     @BeforeEach
     @Step("Setup Search Form")
     public void searchSetUp() {
-        searchPage = new SearchForm();
+        searchForm = new SearchForm();
     }
 
     @Test
-    @DisplayName("Checking that search results are partially relevant to the partial name.")
+    @DisplayName("Checking that search results are relevant to the product full name.")
     @Story("Search Results Relevance")
-    @Description("Verifies that search results contain the full expected result when searching by a partial name like 'Armani'.")
+    @Description("Verifies that search results contain the full expected result when searching by a product full name.")
     @Severity(SeverityLevel.NORMAL)
     public void validFullSearchTest() {
         String searchQuery = "Emporio Armani Sports AR2460";
-        searchPage.searchFor(searchQuery);
+        searchForm.searchFor(searchQuery);
 
-        Assertions.assertTrue(searchPage.getSpecificSearchResultText(SearchFormExpectedMessages.FULL_SEARCH_RESULT)
+        Assertions.assertTrue(searchForm.getSpecificSearchResultText(SearchFormExpectedMessages.FULL_SEARCH_RESULT)
                 .contains(SearchFormExpectedMessages.FULL_SEARCH_RESULT), "Full search result not found.");
     }
 
@@ -39,9 +39,9 @@ public class SearchTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void validPartialSearchTest() {
         String partialSearchQuery = "Emporio";
-        searchPage.searchFor(partialSearchQuery);
+        searchForm.searchFor(partialSearchQuery);
 
-        Assertions.assertTrue(searchPage.getPartialNameSearchResultText().contains(partialSearchQuery),
+        Assertions.assertTrue(searchForm.getPartialNameSearchResultText().contains(partialSearchQuery),
                 "Expected partial search result to contain: " + partialSearchQuery);
     }
 
@@ -52,9 +52,9 @@ public class SearchTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void invalidSearchTest() {
         String incorrectSearchQuery = "someinvalidquerry12345";
-        searchPage.searchFor(incorrectSearchQuery);
+        searchForm.searchFor(incorrectSearchQuery);
 
-        Assertions.assertTrue(searchPage.getNoResultsMessageText()
+        Assertions.assertTrue(searchForm.getNoResultsMessageText()
                 .contains(SearchFormExpectedMessages.NO_RESULTS_MESSAGE), "Invalid search message not displayed.");
     }
 }
