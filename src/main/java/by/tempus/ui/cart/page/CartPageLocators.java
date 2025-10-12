@@ -13,11 +13,4 @@ public class CartPageLocators {
     public static final String CART_ITEMS_LIST = "//span[@class='icons__counter icons__counter--cart']";
     public static final String ITEM_QUANTITY_INPUT = "//input[@class='cart-item-counter__field h6']";
     public static final String EMPTY_CART_MESSAGE = "//div[@class='empty-cart']";
-    public static final String FULL_NAME_INPUT = "//input[@id='ORDER_PROP_19']";
-    public static final String EMAIL_INPUT = "//input[@id='ORDER_PROP_20']";
-    public static final String PHONE_INPUT = "//input[@id='ORDER_PROP_21']";
-    public static final String CITY_MINSK_TAG = "//a[@class='quick-location-tag' and contains(., 'Минск')]";
-    public static final String PLACE_ORDER_BUTTON = "//a[contains(@class, 'order-page__final-button')]";
-    public static final String INCORRECT_EMAIL_CART_ERROR_MESSAGE = "//font[normalize-space()='Некорректный E-Mail']";
-    public static final String EMPTY_PHONE_CART_ERROR_MESSAGE = "//font[normalize-space()='\"Телефон\": обязательно для заполнения']";
 }

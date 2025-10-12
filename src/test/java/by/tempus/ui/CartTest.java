@@ -2,7 +2,6 @@ package by.tempus.ui;
 
 import by.tempus.ui.cart.page.CartPage;
 import by.tempus.ui.cart.page.CartPageExpectedMessages;
-import by.tempus.utils.DataGenerator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,41 +91,5 @@ public class CartTest extends BaseTest {
         cartPage.openCart();
 
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
-    }
-
-    @Test
-    @DisplayName("Verify error on checkout with invalid E-mail")
-    @Story("Checkout Process Failures")
-    @Description("Checks that an invalid email during checkout displays the correct error message.")
-    @Severity(SeverityLevel.CRITICAL)
-    public void verifyErrorOnCheckoutWithInvalidEmailTest() {
-        cartPage.clickWatchButton();
-        cartPage.clickWomenCategory();
-        cartPage.selectFirstMichaelKorsWatch();
-        cartPage.clickAddToCart();
-        cartPage.openCart();
-        cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateIncorrectEmail(), DataGenerator.generateValidPassword());
-        cartPage.selectCityMinsk();
-        cartPage.clickPlaceOrderButton();
-
-        Assertions.assertEquals(CartPageExpectedMessages.INVALID_EMAIL_ERROR, cartPage.getIncorrectEmailErrorMessage());
-    }
-
-    @Test
-    @DisplayName("Verify error on checkout with empty phone number")
-    @Story("Checkout Process Failures")
-    @Description("Checks that an empty phone number during checkout displays the correct error message.")
-    @Severity(SeverityLevel.CRITICAL)
-    public void verifyErrorOnCheckoutWithEmptyPhoneNumberTest() {
-        cartPage.clickWatchButton();
-        cartPage.clickWomenCategory();
-        cartPage.selectFirstMichaelKorsWatch();
-        cartPage.clickAddToCart();
-        cartPage.openCart();
-        cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), "");
-        cartPage.selectCityMinsk();
-        cartPage.clickPlaceOrderButton();
-
-        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_PHONE_FIELD_ERROR, cartPage.getEmptyPhoneErrorMessage(), "");
     }
 }

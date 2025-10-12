@@ -118,7 +118,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.24/aspectjweaver-1.9.24.jar"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar"
                         -Dallure.results.directory=${project.build.directory}/allure-results
                     </argLine>
                     <systemProperties>
@@ -132,7 +132,7 @@
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
-                        <version>1.9.24</version>
+                        <version>1.9.23</version>
                     </dependency>
                 </dependencies>
             </plugin>

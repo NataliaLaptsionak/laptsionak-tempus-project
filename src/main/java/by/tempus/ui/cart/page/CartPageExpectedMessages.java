@@ -6,6 +6,4 @@ public class CartPageExpectedMessages {
             Время выбрать свой идеальный аксессуар!
             Перейтив в каталог
             """;
-    public static final String INVALID_EMAIL_ERROR = "Некорректный E-Mail";
-    public static final String EMPTY_PHONE_FIELD_ERROR = "\"Телефон\": обязательно для заполнения";
 }
