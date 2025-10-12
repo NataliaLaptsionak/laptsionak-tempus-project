@@ -14,16 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("Password Recovery")
 public class RestorePasswordTest {
     private RestorePasswordService restorePasswordService;
-    private String validEmail;
     private String invalidEmail;
-
+    private String unregisteredEmail;
 
     @BeforeEach
     @Step("Set up test data for password recovery")
     public void setUp() {
         restorePasswordService = new RestorePasswordService();
-        validEmail = DataGenerator.generateValidEmail();
         invalidEmail = DataGenerator.generateIncorrectEmail();
+        unregisteredEmail = DataGenerator.generateValidEmail();
+    }
+
+    private void performRestorePasswordAndAssert(String email, String expectedErrorMessage) {
+        restorePasswordService.doRequest(email);
+
+        assertAll(
+                () -> assertEquals(200, restorePasswordService.getStatusCode(), "Expected status code is " + 200),
+                () -> assertEquals(expectedErrorMessage, restorePasswordService.getErrorMessage(), "Incorrect error message")
+        );
     }
 
     @Test
@@ -32,11 +40,7 @@ public class RestorePasswordTest {
     @Description("Checks that attempting password recovery with an empty email returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testPasswordRecoveryEmptyEmail() {
-        restorePasswordService.doRequest("");
-        assertAll(
-                () -> assertEquals(200, restorePasswordService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.EMPTY_EMAIL, restorePasswordService.getErrorMessage(), "Incorrect error message for empty email")
-        );
+        performRestorePasswordAndAssert("", ExpectedMessages.EMPTY_EMAIL);
     }
 
     @Test
@@ -45,11 +49,7 @@ public class RestorePasswordTest {
     @Description("Checks that attempting password recovery with an invalid email format returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testPasswordRecoveryInvalidEmailFormat() {
-        restorePasswordService.doRequest(invalidEmail);
-        assertAll(
-                () -> assertEquals(200, restorePasswordService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.INVALID_EMAIL_FORMAT, restorePasswordService.getErrorMessage(), "Incorrect error message for invalid email format")
-        );
+        performRestorePasswordAndAssert(invalidEmail, ExpectedMessages.INVALID_EMAIL_FORMAT);
     }
 
     @Test
@@ -58,10 +58,6 @@ public class RestorePasswordTest {
     @Description("Checks that attempting password recovery for an unregistered email returns the appropriate error.")
     @Severity(SeverityLevel.CRITICAL)
     public void testPasswordRecoveryNonExistentEmail() {
-        restorePasswordService.doRequest(validEmail);
-        assertAll(
-                () -> assertEquals(200, restorePasswordService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.UNREGISTERED_EMAIL, restorePasswordService.getErrorMessage(), "Incorrect error message for non-existent user")
-        );
+        performRestorePasswordAndAssert(unregisteredEmail, ExpectedMessages.UNREGISTERED_EMAIL);
     }
 }

@@ -31,7 +31,7 @@ public class RestorePasswordForm {
     }
 
     public String getLabelRestorePassword_EmailText() {
-        logger.info("Получение текста метки поля Email.");
+        logger.info("Получение наименования поля Email.");
         return WebDriver.getTextFromElement(RestorePasswordFormLocators.LABEL_EMAIL_FIELD);
     }
 
@@ -46,7 +46,7 @@ public class RestorePasswordForm {
     }
 
     public String getRestorePasswordUnregisteredEmailError() {
-        logger.info("Получение сообщения об ошибке пустого Email при восстановлении пароля.");
+        logger.info("Получение сообщения об ошибке в случае пустого Email при восстановлении пароля.");
         return WebDriver.getTextFromElement(RestorePasswordFormLocators.RESTORE_PASSWORD_UNREGISTERED_EMAIL_ERROR);
     }
 

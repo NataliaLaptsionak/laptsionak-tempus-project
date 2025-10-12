@@ -1,7 +1,6 @@
 package by.tempus.ui;
 
 import by.tempus.utils.DataGenerator;
-import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.login.form.LoginExpectedMessages;
 import by.tempus.ui.login.form.LoginForm;
 import by.tempus.ui.registration.form.RegistrationExpectedMessages;
@@ -18,15 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Epic("UI Testing")
 @Feature("Restore Password Form")
 public class RestorePasswordTest extends BaseTest {
-    LoginForm loginForm = new LoginForm();
-    RestorePasswordForm restorePasswordForm = new RestorePasswordForm();
+    private LoginForm loginForm;
+    private RestorePasswordForm restorePasswordForm;
 
     @BeforeEach
     @Step("Setup Restore Password Form")
-    public void openHomePageClickButtonLogIn() {
-        new HomePage()
-                .openSite()
-                .clickButtonLogin();
+    public void restorePasswordSetUp() {
+        restorePasswordForm = new RestorePasswordForm();
+        loginForm = new LoginForm();
+        homePage.clickButtonLogin();
+        loginForm.clickRestorePasswordLink();
     }
 
     @Test
@@ -35,8 +35,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Checks that clicking the 'Restore password' link navigates to the restore password form.")
     @Severity(SeverityLevel.CRITICAL)
     void RestorePasswordFormRedirectionTest() {
-        loginForm.clickRestorePasswordLink();
-
         assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText());
     }
 
@@ -46,8 +44,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Checks that essential elements like titles, labels, and buttons are present on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyRestorePasswordFormFields() {
-        loginForm.clickRestorePasswordLink();
-
         assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, restorePasswordForm.getLoginFormTitleText());
         assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText());
         assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText());
@@ -61,7 +57,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is displayed when the 'Email' field is left empty on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyEmailField() {
-        loginForm.clickRestorePasswordLink();
         restorePasswordForm.clickButtonSubmitRestore();
 
         assertEquals(RestorePasswordExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, restorePasswordForm.getRestorePasswordFormEmailError());
@@ -73,7 +68,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the '@' symbol on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingAtTest() {
-        loginForm.clickRestorePasswordLink();
         String invalidEmail = DataGenerator.generateInvalidEmailMissingAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -88,7 +82,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the part before the '@' symbol on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartBeforeAtTest() {
-        loginForm.clickRestorePasswordLink();
         RestorePasswordForm restorePasswordForm = new RestorePasswordForm();
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartBeforeAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
@@ -104,7 +97,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the part after the '@' symbol on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
-        loginForm.clickRestorePasswordLink();
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartAfterAt();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -119,7 +111,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is shown for a completely malformed email address on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void incorrectEmailAddressTest() {
-        loginForm.clickRestorePasswordLink();
         String invalidEmail = DataGenerator.generateIncorrectEmail();
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
@@ -133,7 +124,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Tests that an error message is displayed when attempting to restore password for an unregistered email address.")
     @Severity(SeverityLevel.NORMAL)
     public void UnregisteredEmailTest() {
-        loginForm.clickRestorePasswordLink();
         restorePasswordForm.sendKeysEmail(DataGenerator.generateValidEmail());
         restorePasswordForm.clickButtonSubmitRestore();
 
@@ -146,7 +136,6 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Checks that there is a link to navigate to the registration form from the restore password screen, and verifies the title of the registration form.")
     @Severity(SeverityLevel.TRIVIAL)
     public void RegistrationFormRedirectionTest() {
-        loginForm.clickRestorePasswordLink();
         restorePasswordForm.clickTabRegistration();
 
         assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText());

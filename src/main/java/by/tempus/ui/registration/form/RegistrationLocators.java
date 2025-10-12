@@ -1,13 +1,12 @@
 package by.tempus.ui.registration.form;
 
 public class RegistrationLocators {
-
     public static final String TAB_REGISTRATION = "//li[contains(@class, '')]//button[text()='Регистрация']";
     public static final String INPUT_REGISTRATION_FULL_NAME = "//input[@name=\"fullName\"]";
     public static final String INPUT_REGISTRATION_EMAIL = "//form[@class=\"form registration__form js-validate-form\"]//input[@name=\"email\"]";
     public static final String INPUT_REGISTRATION_PHONE = "//input[@type=\"tel\"]";
-    public static final String INPUT_REGISTRATION_PASSWORD = "//label[@class=\"form-input is-required is-password is-error\"]//input[@type=\"password\"]";
-    public static final String INPUT_REGISTRATION_REPEAT_PASSWORD = "//label[@class=\"form-input is-required is-confirm-password\"]//input[@type=\"password\"]";
+    public static final String INPUT_REGISTRATION_PASSWORD = "(//input[@type=\"password\"])[2]";
+    public static final String INPUT_REGISTRATION_REPEAT_PASSWORD = "(//input[@type=\"password\"])[3]";
     public static final String EMPTY_FULL_NAME_ERROR = "//label[@class=\"form-input is-required is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String EMPTY_EMAIL_ERROR = "//label[@class=\"form-input is-required is-email is-error\"]//span[@class=\"form-input__error-message\"]";
     public static final String INCORRECT_EMAIL_ERROR = "//span[@class=\"form-input__error-message\"]";

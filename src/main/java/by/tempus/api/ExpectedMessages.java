@@ -1,7 +1,6 @@
 package by.tempus.api;
 
 public class ExpectedMessages {
-
     public static final String INVALID_CREDENTIALS = "Неверные учетные данные или пользователь деактивирован\\заблокирован";
     public static final String UNREGISTERED_EMAIL = "Неверные учетные данные или пользователь деактивирован\\заблокирован";
     public static final String EMPTY_EMAIL = "Не указан Email";

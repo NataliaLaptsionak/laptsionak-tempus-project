@@ -1,7 +1,6 @@
 package by.tempus.ui.restore.password.form;
 
 public class RestorePasswordExpectedMessages {
-
     public static final String UNREGISTERED_EMAIL_MESSAGE = "Неверные учетные данные или пользователь деактивирован\\заблокирован";
     public static final String RESTORE_PASSWORD_FORM_TEXT = "Для восстановления пароля, введите Email";
     public static final String LABEL_EMAIL_TEXT = "Email";

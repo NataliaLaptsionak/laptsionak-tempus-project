@@ -7,7 +7,7 @@ pipeline {
     }
 
      stages {
-        stage('Checkout & Build') { // Изменил название стадии, чтобы было понятнее
+        stage('Checkout & Build') {
             steps {
 
                 checkout scm

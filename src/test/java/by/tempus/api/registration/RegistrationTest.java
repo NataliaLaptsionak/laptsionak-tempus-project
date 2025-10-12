@@ -3,7 +3,6 @@ package by.tempus.api.registration;
 import by.tempus.api.ExpectedMessages;
 import by.tempus.utils.DataGenerator;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,148 +10,138 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Epic("API Testing") // Overall epic for all API testing
+@DisplayName("API Testing")
 @Feature("Registration")
 public class RegistrationTest {
     private RegistrationService registrationService;
-    private String fullName;
-    private String email;
-    private String phone;
-    private String password;
+    private String validFullName;
+    private String validEmail;
+    private String validPhone;
+    private String validPassword;
+    private String validPasswordRepeat;
 
     @BeforeEach
-    @Step("Set up test data for user registration")
     public void setup() {
         registrationService = new RegistrationService();
-        fullName = DataGenerator.generateValidFullName();
-        email = DataGenerator.generateValidEmail();
-        phone = DataGenerator.generateValidBelarusianPhoneNumber();
-        password = DataGenerator.generateValidPassword();
+
+        validFullName = DataGenerator.generateValidFullName();
+        validEmail = DataGenerator.generateValidEmail();
+        validPhone = DataGenerator.generateValidBelarusianPhoneNumber();
+        validPassword = DataGenerator.generateValidPassword();
+        validPasswordRepeat = validPassword;
+    }
+
+    private void performRegistrationAndAssert(String fullName, String email, String phone,
+                                              String password, String passwordRepeat,
+                                              String expectedErrorMessage) {
+        registrationService.doRegistrationRequest(fullName, email, phone, password, passwordRepeat);
+
+        assertAll(
+                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is " + 200),
+                () -> assertEquals(expectedErrorMessage, registrationService.getErrorMessage(), "Incorrect error message")
+        );
     }
 
     @Test
-    @DisplayName("Verify user registration with empty full name (API response).")
+    @DisplayName("verify user registration with empty full name (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an empty full name returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithEmptyFullName() {
-        registrationService.doRegistrationRequest("", email, phone, password, password);
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.EMPTY_FULL_NAME, registrationService.getErrorMessage(), "Incorrect error message for empty full name")
-        );
+        performRegistrationAndAssert("", validEmail, validPhone, validPassword, validPasswordRepeat,
+                ExpectedMessages.EMPTY_FULL_NAME);
     }
 
     @Test
-    @DisplayName("Verify registration with existing email (API response).")
+    @DisplayName("verify registration with existing email (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an already existing email returns the appropriate error.")
+    @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithExistingEmail() {
-        String existingEmail = DataGenerator.generateValidEmail();
-        registrationService.doRegistrationRequest(DataGenerator.generateValidFullName(), existingEmail, phone, password, password);
-        Assertions.assertEquals(200, registrationService.getStatusCode());
+        performRegistrationAndAssert(validFullName, validEmail, validPhone, validPassword, validPasswordRepeat,
+                null);
 
-        registrationService.doRegistrationRequest(DataGenerator.generateValidFullName(), existingEmail, DataGenerator.generateValidBelarusianPhoneNumber(), DataGenerator.generateValidPassword(), DataGenerator.generateValidPassword());
-
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.REGISTRATION_WITH_EXISTING_EMAIL, registrationService.getErrorMessage(), "Incorrect error message for existing email")
-        );
+        performRegistrationAndAssert(validFullName, validEmail, DataGenerator.generateValidBelarusianPhoneNumber(),
+                DataGenerator.generateValidPassword(), DataGenerator.generateValidPassword(),
+                ExpectedMessages.REGISTRATION_WITH_EXISTING_EMAIL);
     }
 
     @Test
-    @DisplayName("Verify registration with empty email (API response). ")
+    @DisplayName("verify registration with empty email (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an empty email returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithEmptyEmail() {
-        registrationService.doRegistrationRequest(fullName, "", phone, password, password);
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.EMPTY_EMAIL, registrationService.getErrorMessage(), "Incorrect error message for empty email")
-        );
+        performRegistrationAndAssert(validFullName, "", validPhone, validPassword, validPasswordRepeat,
+                ExpectedMessages.EMPTY_EMAIL);
     }
 
     @Test
-    @DisplayName("Verify registration with incorrect phone number (API response).")
+    @DisplayName("verify registration with incorrect phone number (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an incorrectly formatted phone number returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testIncorrectPhoneNumber() {
-        registrationService.doRegistrationRequest(fullName, email, DataGenerator.generateInvalidBelarusianPhoneNumber(), password, password);
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.INVALID_PHONE_NUMBER, registrationService.getErrorMessage(), "Incorrect error message for invalid phone number")
-        );
+        performRegistrationAndAssert(validFullName, validEmail, DataGenerator.generateInvalidBelarusianPhoneNumber(),
+                validPassword, validPasswordRepeat,
+                ExpectedMessages.INVALID_PHONE_NUMBER);
     }
 
     @Test
-    @DisplayName("Verify user registration with existing phone number (API response).")
+    @DisplayName("verify user registration with existing phone number (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an already existing phone number returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
-    public void testUserRegistrationWithExistingPhone() {
+    public void testRegistrationWithExistingPhone() {
         String existingPhone = DataGenerator.generateValidBelarusianPhoneNumber();
-        registrationService.doRegistrationRequest(fullName, email, existingPhone, password, password);
-        Assertions.assertEquals(200, registrationService.getStatusCode());
+        String uniqueEmailForFirstRegistration = DataGenerator.generateValidEmail();
 
-        registrationService.doRegistrationRequest(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), existingPhone, DataGenerator.generateValidPassword(), DataGenerator.generateValidPassword());
+        performRegistrationAndAssert(validFullName, uniqueEmailForFirstRegistration, existingPhone, validPassword, validPasswordRepeat,
+                null);
 
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.REGISTRATION_WITH_EXISTING_PHONE, registrationService.getErrorMessage(), "Incorrect error message for existing phone number")
-        );
+        performRegistrationAndAssert(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), existingPhone,
+                DataGenerator.generateValidPassword(), DataGenerator.generateValidPassword(),
+                ExpectedMessages.REGISTRATION_WITH_EXISTING_PHONE);
     }
 
     @Test
-    @DisplayName("Verify user registration with empty phone number (API response).")
+    @DisplayName("verify user registration with empty phone (API response)")
     @Story("Unsuccessful Registration")
-    @Description("Checks that registration with an empty phone number returns the appropriate error.")
+    @Description("Checks that registration with an empty phone returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithEmptyPhone() {
-        registrationService.doRegistrationRequest(fullName, email, "", password, password);
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.EMPTY_PHONE, registrationService.getErrorMessage(), "Incorrect error message for empty phone number")
-        );
+        performRegistrationAndAssert(validFullName, validEmail, "", validPassword, validPasswordRepeat,
+                ExpectedMessages.EMPTY_PHONE);
     }
 
     @Test
-    @DisplayName("Verify user registration with empty password (API response).")
+    @DisplayName("verify user registration with empty password (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an empty password returns the appropriate error.")
     @Severity(SeverityLevel.CRITICAL)
     public void testUserRegistrationWithEmptyPassword() {
-        registrationService.doRegistrationRequest(fullName, email, phone, "", "");
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.EMPTY_PASSWORD, registrationService.getErrorMessage(), "Incorrect error message for empty password")
-        );
+        performRegistrationAndAssert(validFullName, validEmail, validPhone, "", "",
+                ExpectedMessages.EMPTY_PASSWORD);
     }
 
     @Test
-    @DisplayName("Verify user registration with empty repeat password (API response).")
+    @DisplayName("verify user registration with empty repeat password (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with an empty repeat password (if applicable, assuming this means password confirmation is missing/empty) returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithEmptyRepeatPassword() {
-        registrationService.doRegistrationRequest(fullName, email, phone, password, DataGenerator.generateInvalidRepeatPassword());
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.INCORRECT_REPEAT_PASSWORD, registrationService.getErrorMessage(), "Incorrect error message for empty repeat password")
-        );
+        performRegistrationAndAssert(validFullName, validEmail, validPhone, validPassword, "",
+                ExpectedMessages.INCORRECT_REPEAT_PASSWORD);
     }
 
     @Test
-    @DisplayName("Verify user registration with restriction of the password length (API response).")
+    @DisplayName("verify user registration with password of the password length restriction (API response)")
     @Story("Unsuccessful Registration")
     @Description("Checks that registration with a password not meeting length requirements returns the appropriate error.")
     @Severity(SeverityLevel.NORMAL)
     public void testUserRegistrationWithPasswordLengthRestriction() {
-        registrationService.doRegistrationRequest(fullName, email, phone, DataGenerator.generateInvalidPassword(), DataGenerator.generateInvalidPassword());
-        assertAll(
-                () -> assertEquals(200, registrationService.getStatusCode(), "Expected status code is 200"),
-                () -> assertEquals(ExpectedMessages.PASSWORD_LENGTH_RESTRICTION, registrationService.getErrorMessage(), "Incorrect error message for password length restriction")
-        );
+        String invalidLengthPassword = DataGenerator.generateInvalidPassword();
+        performRegistrationAndAssert(validFullName, validEmail, validPhone, invalidLengthPassword, invalidLengthPassword,
+                ExpectedMessages.PASSWORD_LENGTH_RESTRICTION);
     }
 }

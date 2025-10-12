@@ -1,8 +1,8 @@
 package by.tempus.ui;
 
 import by.tempus.ui.cart.page.CartPage;
-import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.cart.page.CartPageExpectedMessages;
+import by.tempus.utils.DataGenerator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,10 +18,8 @@ public class CartTest extends BaseTest {
 
     @BeforeEach
     @Step("Initialize Home and Cart pages, open site")
-    public void setUp() {
-        HomePage homePage = new HomePage();
+    public void cartSetUp() {
         cartPage = new CartPage();
-        homePage.openSite();
     }
 
     @Test
@@ -41,11 +39,11 @@ public class CartTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Verify adding multiple different items to cart")
     public void addMultipleItemsToCartTest() {
-        cartPage.clickCatalogButton();
+        cartPage.clickWatchButton();
         cartPage.clickWomenCategory();
         cartPage.selectFirstMichaelKorsWatch();
         cartPage.clickAddToCart();
-        cartPage.clickAddToCart().clickCatalogButton();
+        cartPage.clickAddToCart().clickWatchButton();
         cartPage.clickWomenCategory();
         cartPage.selectSecondMichaelKorsWatch();
         cartPage.clickAddToCart();
@@ -60,8 +58,7 @@ public class CartTest extends BaseTest {
     @Description("Checks that item quantity in the cart can be increased and decreased correctly.")
     @Severity(SeverityLevel.NORMAL)
     public void increaseAndDecreaseItemQuantityTest() throws InterruptedException {
-
-        cartPage.clickCatalogButton();
+        cartPage.clickWatchButton();
         cartPage.clickWomenCategory();
         cartPage.selectFirstMichaelKorsWatch();
         cartPage.clickAddToCart();
@@ -86,7 +83,7 @@ public class CartTest extends BaseTest {
     @Description("Checks that the shopping cart can be completely cleared and displays the empty cart message.")
     @Severity(SeverityLevel.NORMAL)
     public void clearCartTest() {
-        cartPage.clickCatalogButton();
+        cartPage.clickWatchButton();
         cartPage.clickWomenCategory();
         cartPage.selectFirstMichaelKorsWatch();
         cartPage.clickAddToCart();
@@ -95,5 +92,41 @@ public class CartTest extends BaseTest {
         cartPage.openCart();
 
         Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
+    }
+
+    @Test
+    @DisplayName("Verify error on checkout with invalid E-mail")
+    @Story("Checkout Process Failures")
+    @Description("Checks that an invalid email during checkout displays the correct error message.")
+    @Severity(SeverityLevel.CRITICAL)
+    public void verifyErrorOnCheckoutWithInvalidEmailTest() {
+        cartPage.clickWatchButton();
+        cartPage.clickWomenCategory();
+        cartPage.selectFirstMichaelKorsWatch();
+        cartPage.clickAddToCart();
+        cartPage.openCart();
+        cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateIncorrectEmail(), DataGenerator.generateValidPassword());
+        cartPage.selectCityMinsk();
+        cartPage.clickPlaceOrderButton();
+
+        Assertions.assertEquals(CartPageExpectedMessages.INVALID_EMAIL_ERROR, cartPage.getIncorrectEmailErrorMessage());
+    }
+
+    @Test
+    @DisplayName("Verify error on checkout with empty phone number")
+    @Story("Checkout Process Failures")
+    @Description("Checks that an empty phone number during checkout displays the correct error message.")
+    @Severity(SeverityLevel.CRITICAL)
+    public void verifyErrorOnCheckoutWithEmptyPhoneNumberTest() {
+        cartPage.clickWatchButton();
+        cartPage.clickWomenCategory();
+        cartPage.selectFirstMichaelKorsWatch();
+        cartPage.clickAddToCart();
+        cartPage.openCart();
+        cartPage.fillCheckoutForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), "");
+        cartPage.selectCityMinsk();
+        cartPage.clickPlaceOrderButton();
+
+        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_PHONE_FIELD_ERROR, cartPage.getEmptyPhoneErrorMessage(), "");
     }
 }

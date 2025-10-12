@@ -1,7 +1,6 @@
 package by.tempus.ui.registration.form;
 
 public class RegistrationExpectedMessages {
-
     public static final String REGISTRATION_TAB_TITLE = "Регистрация";
     public static final String FULL_NAME_FIELD_LABEL = "ФИО";
     public static final String EMAIL_FIELD_LABEL = "Email";

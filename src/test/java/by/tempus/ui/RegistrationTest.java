@@ -1,7 +1,6 @@
 package by.tempus.ui;
 
 import by.tempus.utils.DataGenerator;
-import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.registration.form.RegistrationExpectedMessages;
 import by.tempus.ui.registration.form.RegistrationForm;
 import io.qameta.allure.*;
@@ -13,14 +12,14 @@ import org.junit.jupiter.api.Test;
 @Epic("UI Testing")
 @Feature("Registration Form")
 public class RegistrationTest extends BaseTest {
-    RegistrationForm registrationForm = new RegistrationForm();
+    private  RegistrationForm registrationForm;
 
     @BeforeEach
     @Step("Setup Registration Form")
-    public void setupRegistrationForm() {
-        new HomePage()
-                .openSite()
-                .clickButtonLogin();
+    public void registrationSetUp() {
+        registrationForm = new RegistrationForm();
+        homePage.clickButtonLogin();
+        registrationForm.clickTabRegistration();
     }
 
     @Test
@@ -29,8 +28,6 @@ public class RegistrationTest extends BaseTest {
     @Description("Checks that the registration form displays the correct title.")
     @Severity(SeverityLevel.TRIVIAL)
     public void verifyRegistrationFormTitle() {
-        registrationForm.clickTabRegistration();
-
         Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab());
     }
 
@@ -40,8 +37,6 @@ public class RegistrationTest extends BaseTest {
     @Description("Checks that all required fields are present on the registration form.")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyLRegistrationFormFields() {
-        registrationForm.clickTabRegistration();
-
         Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab());
         Assertions.assertEquals(RegistrationExpectedMessages.FULL_NAME_FIELD_LABEL, registrationForm.getLabelFulNameFieldText());
         Assertions.assertEquals(RegistrationExpectedMessages.EMAIL_FIELD_LABEL, registrationForm.getLabelEmailFieldText());
@@ -58,7 +53,6 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that error messages are displayed for all empty required fields upon registration attempt.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessagesForEmptyRegistrationFields() {
-        registrationForm.clickTabRegistration();
         registrationForm.clickButtonRegistration();
 
         Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError());
@@ -74,12 +68,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the 'Full name' field is left empty.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyFullNameField() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
         registrationForm.fillRegistrationForm("", DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
-        registrationForm.clickAgreementCheckbox();
-        registrationForm.clickButtonRegistration();
 
         Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError());
     }
@@ -90,9 +79,6 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the 'Email' field is left empty.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyField() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
         registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
         registrationForm.sendKeysPhone(DataGenerator.generateValidBelarusianPhoneNumber());
         registrationForm.sendKeysPassword(DataGenerator.generateValidPassword());
@@ -109,15 +95,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the 'Phone' field is left empty.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyPhone() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
-        registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
-        registrationForm.sendKeysEmail(DataGenerator.generateValidEmail());
-        registrationForm.sendKeysPassword(DataGenerator.generateValidPassword());
-        registrationForm.sendKeysRepeatPassword(DataGenerator.generateValidRepeatPassword());
-        registrationForm.clickAgreementCheckbox();
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(),"",DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PHONE_ERROR, registrationForm.getRegistrationPhoneError());
     }
@@ -128,15 +106,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the 'Password' field is left empty.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyPassword() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
-        registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
-        registrationForm.sendKeysEmail(DataGenerator.generateValidEmail());
-        registrationForm.sendKeysPhone(DataGenerator.generateValidBelarusianPhoneNumber());
-        registrationForm.sendKeysRepeatPassword(DataGenerator.generateValidRepeatPassword());
-        registrationForm.clickAgreementCheckbox();
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),"", DataGenerator.generateValidRepeatPassword());
 
         Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PASSWORD_ERROR, registrationForm.getRegistrationPasswordError());
     }
@@ -147,15 +117,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the 'Repeat password' field is left empty.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyRepeatPassword() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
-        registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
-        registrationForm.sendKeysEmail(DataGenerator.generateValidEmail());
-        registrationForm.sendKeysPhone(DataGenerator.generateValidBelarusianPhoneNumber());
-        registrationForm.sendKeysPassword(DataGenerator.generateValidPassword());
-        registrationForm.clickAgreementCheckbox();
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), "");
 
         Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_REPEAT_PASSWORD_ERROR, registrationForm.getRegistrationRepeatPasswordError());
     }
@@ -166,9 +128,6 @@ public class RegistrationTest extends BaseTest {
     @Description("Verifies the error message when the agreement checkbox is not checked.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorMessageForEmptyCheckbox() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
         registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
         registrationForm.sendKeysEmail(DataGenerator.generateValidEmail());
         registrationForm.sendKeysPhone(DataGenerator.generateValidBelarusianPhoneNumber());
@@ -185,12 +144,8 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the part before the '@' symbol.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartBeforeAtTest() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartBeforeAt();
-        registrationForm.sendKeysEmail(invalidEmail);
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingPartBeforeAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_BEFORE_AT, invalidEmail);
         Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());
@@ -202,11 +157,8 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the part after the '@' symbol.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
-        registrationForm.clickTabRegistration();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartAfterAt();
-        registrationForm.sendKeysEmail(invalidEmail);
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingPartAfterAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_AFTER_AT, invalidEmail);
         Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());
@@ -218,15 +170,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that an error message is shown for a completely malformed email address.")
     @Severity(SeverityLevel.NORMAL)
     public void incorrectEmailAddressTest() {
-        registrationForm.clickTabRegistration();
-        registrationForm.clickButtonRegistration();
-
-        registrationForm.sendKeysFullName(DataGenerator.generateValidFullName());
-        registrationForm.sendKeysEmail(DataGenerator.generateIncorrectEmail());
-        registrationForm.sendKeysPhone(DataGenerator.generateValidBelarusianPhoneNumber());
-        registrationForm.sendKeysPassword(DataGenerator.generateValidPassword());
-        registrationForm.sendKeysRepeatPassword(DataGenerator.generateValidRepeatPassword());
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateIncorrectEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         Assertions.assertEquals(RegistrationExpectedMessages.INCORRECT_EMAIL_ERROR, registrationForm.getIncorrectEmailError());
     }
@@ -237,11 +181,8 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the '@' symbol.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingAtTest() {
-        registrationForm.clickTabRegistration();
-
         String invalidEmail = DataGenerator.generateInvalidEmailMissingAt();
-        registrationForm.sendKeysEmail(invalidEmail);
-        registrationForm.clickButtonRegistration();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_AT, invalidEmail);
         Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());

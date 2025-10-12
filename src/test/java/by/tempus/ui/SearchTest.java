@@ -1,6 +1,5 @@
 package by.tempus.ui;
 
-import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.search.form.SearchFormExpectedMessages;
 import by.tempus.ui.search.form.SearchForm;
 import io.qameta.allure.*;
@@ -15,9 +14,8 @@ public class SearchTest extends BaseTest {
     private SearchForm searchPage;
 
     @BeforeEach
-    public void openHomePage() {
-        HomePage homePage = new HomePage();
-        homePage.openSite();
+    @Step("Setup Search Form")
+    public void searchSetUp() {
         searchPage = new SearchForm();
     }
 
@@ -43,7 +41,7 @@ public class SearchTest extends BaseTest {
         String partialSearchQuery = "Emporio";
         searchPage.searchFor(partialSearchQuery);
 
-        Assertions.assertTrue(searchPage.getFirstSearchResultText().contains(partialSearchQuery),
+        Assertions.assertTrue(searchPage.getPartialNameSearchResultText().contains(partialSearchQuery),
                 "Expected partial search result to contain: " + partialSearchQuery);
     }
 

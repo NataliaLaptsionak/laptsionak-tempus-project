@@ -1,7 +1,6 @@
 package by.tempus.ui.login.form;
 
 public class LoginExpectedMessages {
-
     public static final String LOGIN_FORM_TITLE = "Вход";
     public static final String EMAIL_FIELD_LABEL = "Email";
     public static final String PASSWORD_FIELD_LABEL = "Пароль";

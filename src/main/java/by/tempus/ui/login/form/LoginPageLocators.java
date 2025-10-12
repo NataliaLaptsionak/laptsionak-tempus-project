@@ -1,7 +1,6 @@
 package by.tempus.ui.login.form;
 
 public class LoginPageLocators {
-
     public static final String LOGIN_FORM_TITLE = "//li[contains(@class, 'is-active')]//button[text()='Вход']";
     public static final String INPUT_LOGIN_EMAIL = "//input[@name='email']";
     public static final String INPUT_LOGIN_PASSWORD = "//input[@name='password']";
@@ -13,6 +12,5 @@ public class LoginPageLocators {
     public static final String LABEL_PASSWORD_TEXT = "//form[@class='form authorize__form js-validate-form']//label[@class='form-input is-required is-password']//span[@class='form-input__placeholder']";
     public static final String LINK_RESTORE_PASSWORD = "//button[@class='form__action j-tabBtnHandle']";
     public static final String RESTORE_PASSWORD_FORM_TITLE_TEXT = "//div[@class='form__recover' and normalize-space()='Для восстановления пароля, введите Email']";
-    public static final String BUTTON_REGISTRATION_FORM = "//li[contains(@class, '')]//button[text()='Регистрация']";
     public static final String TAB_REGISTRATION = "//li[contains(@class, '')]//button[text()='Регистрация']";
 }

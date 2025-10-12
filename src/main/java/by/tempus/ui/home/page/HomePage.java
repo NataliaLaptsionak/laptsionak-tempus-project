@@ -13,11 +13,10 @@ public class HomePage {
         logger.info("Инициализирован объект HomePage.");
     }
 
-    public HomePage openSite() {
+    public void openSite() {
         logger.info("Открытие сайта по URL: {}", URL);
         WebDriver.getDriver().navigate().to(URL);
         logger.debug("Сайт успешно открыт.");
-        return this;
     }
 
     public void clickButtonLogin() {

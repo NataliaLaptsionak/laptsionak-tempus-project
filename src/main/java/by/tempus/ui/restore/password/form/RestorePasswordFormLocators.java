@@ -1,7 +1,6 @@
 package by.tempus.ui.restore.password.form;
 
 public class RestorePasswordFormLocators {
-
     public static final String RESTORE_PASSWORD_FORM_TEXT = "//div[@class='form__recover' and normalize-space()='Для восстановления пароля, введите Email']";
     public static final String BUTTON_SUBMIT_RESTORE = "//form[@class=\"form restore__form js-validate-form\"]//button[@class=\"button is-primary\"]";
     public static final String RESTORE_PASSWORD_FORM_EMAIL_ERROR = "//span[@class=\"form-input__error-message\"]";

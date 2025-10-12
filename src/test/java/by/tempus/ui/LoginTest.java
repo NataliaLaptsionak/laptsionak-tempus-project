@@ -1,6 +1,5 @@
 package by.tempus.ui;
 
-import by.tempus.ui.home.page.HomePage;
 import by.tempus.ui.login.form.LoginExpectedMessages;
 import by.tempus.ui.login.form.LoginForm;
 import io.qameta.allure.*;
@@ -13,14 +12,13 @@ import by.tempus.utils.DataGenerator;
 @Epic("UI Testing")
 @Feature("Login Form")
 public class LoginTest extends BaseTest {
-    LoginForm loginForm = new LoginForm();
+    private LoginForm loginForm;
 
     @BeforeEach
-    @Step("Initialize Home page and Login form, navigate to login")
-    public void openHomePageClickButtonLogIn() {
-        new HomePage()
-                .openSite()
-                .clickButtonLogin();
+    @Step("Initialize Login form, navigate to login")
+    public void loginSetUp() {
+        loginForm = new LoginForm();
+        homePage.clickButtonLogin();
     }
 
     @Test
@@ -29,7 +27,6 @@ public class LoginTest extends BaseTest {
     @Description("Checks that the login form displays the correct title.")
     @Severity(SeverityLevel.TRIVIAL)
     public void verifyLoginFormTitle() {
-
         Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText());
     }
 
@@ -39,13 +36,12 @@ public class LoginTest extends BaseTest {
     @Description("Checks that all expected elements (email field, password field, login button, etc.) are present and visible on the login form.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyLoginFormFields() {
-
         Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText());
         Assertions.assertEquals(LoginExpectedMessages.EMAIL_FIELD_LABEL, loginForm.getLabelEmailText());
         Assertions.assertEquals(LoginExpectedMessages.PASSWORD_FIELD_LABEL, loginForm.getLabelPasswordText());
         Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_FIELD_LABEL, loginForm.getLinkRestorePasswordText());
         Assertions.assertEquals(LoginExpectedMessages.LOGIN_BUTTON_TEXT, loginForm.getButtonLoginText());
-        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, loginForm.getButtonRegistrationFormText());
+        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, loginForm.getTitleRegistrationTab());
     }
 
     @Test

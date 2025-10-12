@@ -19,19 +19,8 @@ public class LoginForm {
         return WebDriver.getTextFromElement(LoginPageLocators.LOGIN_FORM_TITLE);
     }
 
-    public String getButtonRegistrationFormText() {
-        logger.info("Получение текста кнопки 'Регистрация'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.BUTTON_REGISTRATION_FORM);
-    }
-
-    public void clickTabRegistration() {
-        logger.info("Нажатие на кнопку 'Регистрация'.");
-        WebDriver.clickElement(LoginPageLocators.BUTTON_REGISTRATION_FORM);
-        logger.debug("Кнопка 'Регистрация' нажата.");
-    }
-
     public String getLabelEmailText() {
-        logger.info("Получение текста из поля ввода Email.");
+        logger.info("Получение наименования поля ввода Email.");
         return WebDriver.getTextFromElement(LoginPageLocators.LABEL_EMAIL_TEXT);
     }
 
@@ -64,8 +53,14 @@ public class LoginForm {
     }
 
     public String getLabelPasswordText() {
-        logger.info("Получение лейбл для поля 'Пароль'.");
+        logger.info("Получение наименования поля 'Пароль'.");
         return WebDriver.getTextFromElement(LoginPageLocators.LABEL_PASSWORD_TEXT);
+    }
+
+    public void clickTabRegistration() {
+        logger.info("Нажатие на вкладку 'Регистрация'.");
+        WebDriver.clickElement(LoginPageLocators.TAB_REGISTRATION);
+        logger.debug("Вкладка 'Регистрация' нажата.");
     }
 
     public String getEmptyEmailError() {
@@ -91,7 +86,7 @@ public class LoginForm {
     }
 
     public String getIncorrectEmailError() {
-        logger.info("Получение сообщения об ошибке Email.");
+        logger.info("Получение сообщения об ошибке в случае ввода некорректного Email.");
         return WebDriver.getTextFromElement(LoginPageLocators.EMPTY_EMAIL_ERROR);
     }
 

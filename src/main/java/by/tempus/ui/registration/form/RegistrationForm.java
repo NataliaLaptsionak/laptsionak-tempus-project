@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 public class RegistrationForm {
     private static final Logger logger = LogManager.getLogger(RegistrationForm.class);
 
-
     public RegistrationForm() {
         logger.info("Инициализирован объект RegistrationForm.");
     }
@@ -37,9 +36,10 @@ public class RegistrationForm {
     }
 
     public String getLabelFulNameFieldText() {
-        logger.info("Получение лейбл поля 'ФИО'.");
+        logger.info("Получение наименования поля 'ФИО'.");
         return WebDriver.getTextFromElement(RegistrationLocators.LABEL_FULL_NAME_FIELD_TEXT);
     }
+
     public void sendKeysFullName(String fullName) {
         logger.info("Ввод ФИО: '{}'.", fullName);
         WebDriver.sendkeysToElement(RegistrationLocators.INPUT_REGISTRATION_FULL_NAME, fullName);
@@ -47,7 +47,7 @@ public class RegistrationForm {
     }
 
     public String getLabelEmailFieldText() {
-        logger.info("Получение текста из поля Email.");
+        logger.info("Получение наименования поля Email.");
         return WebDriver.getTextFromElement(RegistrationLocators.LABEL_EMAIL_FIELD_TEXT);
     }
 
@@ -58,7 +58,7 @@ public class RegistrationForm {
     }
 
     public String getLabelPhoneFieldText() {
-        logger.info("Получение текста из поля 'Телефон'.");
+        logger.info("Получение наименования поля 'Телефон'.");
         return WebDriver.getTextFromElement(RegistrationLocators.LABEL_PHONE_FIELD_TEXT);
     }
 
@@ -69,25 +69,27 @@ public class RegistrationForm {
     }
 
     public String getLabelPasswordFieldText() {
-        logger.info("Получение текста из поля 'Пароль'.");
+        logger.info("Получение наименования поля 'Пароль'.");
         return WebDriver.getTextFromElement(RegistrationLocators.LABEL_PASSWORD_FIELD_TEXT);
     }
 
     public void sendKeysPassword(String password) {
         logger.info("Ввод пароля (скрыто) в поле 'Пароль'.");
+        WebDriver.scrollToElement(RegistrationLocators.INPUT_REGISTRATION_PASSWORD);
         WebDriver.sendkeysToElement(RegistrationLocators.INPUT_REGISTRATION_PASSWORD, password);
         logger.debug("Пароль введен.");
     }
 
     public String getLabelRepeatPasswordFieldText() {
-        logger.info("Получение текста из поля 'Повторить пароль'.");
+        logger.info("Получение наименования поля 'Повторить пароль'.");
         return WebDriver.getTextFromElement(RegistrationLocators.LABEL_REPEAT_PASSWORD_FIELD_TEXT);
     }
 
     public void sendKeysRepeatPassword(String repeatPassword) {
-        logger.info("Ввод повторяющегося пароля (скрыто) в поле 'Повторить пароль'.");
+        logger.info("Ввод пароля в поле 'Повторить пароль'.");
+        WebDriver.scrollToElement(RegistrationLocators.INPUT_REGISTRATION_REPEAT_PASSWORD);
         WebDriver.sendkeysToElement(RegistrationLocators.INPUT_REGISTRATION_REPEAT_PASSWORD, repeatPassword);
-        logger.debug("Повторяющийся пароль введен.");
+        logger.debug("Пароль в поле 'Повторить пароль' введен.");
     }
 
     public String getLabelAgreementCheckboxText() {
@@ -108,32 +110,32 @@ public class RegistrationForm {
     }
 
     public String getRegistrationEmailError() {
-        logger.info("Получение сообщения об ошибке в случае незаполненноо поля Email.");
+        logger.info("Получение сообщения об ошибке в случае незаполненного поля Email.");
         return WebDriver.getTextFromElement(RegistrationLocators.EMPTY_EMAIL_ERROR);
     }
 
     public String getIncorrectEmailError() {
-        logger.info("Получение сообщения об ошибке некорректного Email.");
+        logger.info("Получение сообщения об ошибке в случае некорректного Email.");
         return WebDriver.getTextFromElement(RegistrationLocators.INCORRECT_EMAIL_ERROR);
     }
 
     public String getRegistrationFullNameError() {
-        logger.info("Получение сообщения об ошибке пустого поля 'Полное имя'.");
+        logger.info("Получение сообщения об ошибке в случае пустого поля 'Полное имя'.");
         return WebDriver.getTextFromElement(RegistrationLocators.EMPTY_FULL_NAME_ERROR);
     }
 
     public String getRegistrationPasswordError() {
-        logger.info("Получение сообщения об ошибке пустого пароля.");
+        logger.info("Получение сообщения об ошибке в случае пустого пароля.");
         return WebDriver.getTextFromElement(RegistrationLocators.EMPTY_PASSWORD_ERROR);
     }
 
     public String getRegistrationRepeatPasswordError() {
-        logger.info("Получение сообщения об ошибке повторяющегося пароля.");
+        logger.info("Получение сообщения об ошибке в случае повторяющегося пароля.");
         return WebDriver.getTextFromElement(RegistrationLocators.REGISTRATION_REPEAT_PASSWORD_ERROR);
     }
 
     public String getRegistrationPhoneError() {
-        logger.info("Получение сообщения об ошибке пустого номера телефона.");
+        logger.info("Получение сообщения об ошибке в случае пустого номера телефона.");
         return WebDriver.getTextFromElement(RegistrationLocators.EMPTY_PHONE_ERROR);
     }
 
@@ -158,7 +160,8 @@ public class RegistrationForm {
     }
 
     public void clickAgreementCheckBox() {
-        logger.info("Нажатие на чекбокс согласия.");
+        logger.info("Нажатие на чекбокс принятия соглашений.");
         WebDriver.clickElement(RegistrationLocators.AGREEMENT_CHECKBOX);
-        logger.debug("Чекбокс согласия нажат.");}
+        logger.debug("Чекбокс принятия соглашений нажат.");
+    }
 }
