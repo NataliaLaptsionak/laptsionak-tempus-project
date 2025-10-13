@@ -1,6 +1,6 @@
 package by.tempus.web.driver;
 
-import by.tempus.utils.JavaScriptExecutor;
+import by.tempus.utils.JsScriptExecutor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,7 +57,7 @@ public class Browser {
 
     public static void clickElement(String xpath) {
         WebElement element = findElement(xpath);
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].scrollIntoView(true);", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].scrollIntoView(true);", element);
         element.click();
     }
 }

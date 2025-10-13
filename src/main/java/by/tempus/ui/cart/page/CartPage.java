@@ -1,6 +1,6 @@
 package by.tempus.ui.cart.page;
 
-import by.tempus.utils.JavaScriptExecutor;
+import by.tempus.utils.JsScriptExecutor;
 import by.tempus.web.driver.Browser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +34,7 @@ public class CartPage {
         logger.info("Нажатие на товар Michael Kors Lennox MK7337.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7337)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Товар Michael Kors Lennox MK7337 нажат.");
     }
 
@@ -42,7 +42,7 @@ public class CartPage {
         logger.info("Нажатие на товар Michael Kors Runway MK7325.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7325)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("товар Michael Kors Runway MK7325 нажат.");
     }
 
@@ -50,7 +50,7 @@ public class CartPage {
         logger.info("Нажатие на кнопку 'Добавить в корзину'.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ADD_TO_CART_BUTTON)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Кнопка 'Добавить в корзину' нажата.");
     }
 
@@ -64,7 +64,7 @@ public class CartPage {
         logger.info("Увеличение количества товара в корзине.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ITEM_INCREASE_QUANTITY_BUTTON)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Количество товара увеличено.");
     }
 
@@ -72,7 +72,7 @@ public class CartPage {
         logger.info("Уменьшение количества товара в корзине.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ITEM_DECREASE_QUANTITY_BUTTON)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Количество товара уменьшено.");
     }
 
@@ -80,7 +80,7 @@ public class CartPage {
         logger.info("Нажатие на кнопку 'Очистить корзину'.");
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.CLEAR_CART_BUTTON)));
-        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
+        JsScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Кнопка 'Очистить корзину' нажата.");
     }
 
