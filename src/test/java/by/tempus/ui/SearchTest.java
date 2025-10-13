@@ -29,7 +29,7 @@ public class SearchTest extends BaseTest {
         searchForm.searchFor(searchQuery);
 
         Assertions.assertTrue(searchForm.getSpecificSearchResultText(SearchFormExpectedMessages.FULL_SEARCH_RESULT)
-                .contains(SearchFormExpectedMessages.FULL_SEARCH_RESULT), "Full search result not found.");
+                .contains(SearchFormExpectedMessages.FULL_SEARCH_RESULT), "Search result did not contain the expected full product name.");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class SearchTest extends BaseTest {
         searchForm.searchFor(partialSearchQuery);
 
         Assertions.assertTrue(searchForm.getPartialNameSearchResultText().contains(partialSearchQuery),
-                "Expected partial search result to contain: " + partialSearchQuery);
+                "Search result did not contain the expected partial query");
     }
 
     @Test
@@ -55,6 +55,6 @@ public class SearchTest extends BaseTest {
         searchForm.searchFor(incorrectSearchQuery);
 
         Assertions.assertTrue(searchForm.getNoResultsMessageText()
-                .contains(SearchFormExpectedMessages.NO_RESULTS_MESSAGE), "Invalid search message not displayed.");
+                .contains(SearchFormExpectedMessages.NO_RESULTS_MESSAGE), "No results message did not match expected.");
     }
 }

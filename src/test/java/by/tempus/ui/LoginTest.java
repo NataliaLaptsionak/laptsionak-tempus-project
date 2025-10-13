@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
     @Description("Checks that the login form displays the correct title.")
     @Severity(SeverityLevel.TRIVIAL)
     public void verifyLoginFormTitle() {
-        Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText());
+        Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText(), "Login form title did not match expected value.");
     }
 
     @Test
@@ -36,12 +36,12 @@ public class LoginTest extends BaseTest {
     @Description("Checks that all expected elements (email field, password field, login button, etc.) are present and visible on the login form.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyLoginFormFields() {
-        Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText());
-        Assertions.assertEquals(LoginExpectedMessages.EMAIL_FIELD_LABEL, loginForm.getLabelEmailText());
-        Assertions.assertEquals(LoginExpectedMessages.PASSWORD_FIELD_LABEL, loginForm.getLabelPasswordText());
-        Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_FIELD_LABEL, loginForm.getLinkRestorePasswordText());
-        Assertions.assertEquals(LoginExpectedMessages.LOGIN_BUTTON_TEXT, loginForm.getButtonLoginText());
-        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, loginForm.getTitleRegistrationTab());
+        Assertions.assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, loginForm.getLoginFormTitleText(), "Login form title text is incorrect.");
+        Assertions.assertEquals(LoginExpectedMessages.EMAIL_FIELD_LABEL, loginForm.getLabelEmailText(), "Email field label text is incorrect.");
+        Assertions.assertEquals(LoginExpectedMessages.PASSWORD_FIELD_LABEL, loginForm.getLabelPasswordText(), "Password field label text is incorrect.");
+        Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_FIELD_LABEL, loginForm.getLinkRestorePasswordText(),"Restore password link text is incorrect.");
+        Assertions.assertEquals(LoginExpectedMessages.LOGIN_BUTTON_TEXT, loginForm.getButtonLoginText(), "Login button text is incorrect.");
+        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, loginForm.getTitleRegistrationTab(),  "Registration tab title text is incorrect.");
     }
 
     @Test
@@ -52,8 +52,8 @@ public class LoginTest extends BaseTest {
     public void verifyErrorMessagesForEmptyFields() {
         loginForm.clickButtonLogin();
 
-        Assertions.assertEquals(LoginExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, loginForm.getEmptyEmailError());
-        Assertions.assertEquals(LoginExpectedMessages.EMPTY_PASSWORD_FIELD_ERROR, loginForm.getEmptyPasswordError());
+        Assertions.assertEquals(LoginExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, loginForm.getEmptyEmailError(), "Error message for empty email field did not match expected.");
+        Assertions.assertEquals(LoginExpectedMessages.EMPTY_PASSWORD_FIELD_ERROR, loginForm.getEmptyPasswordError(), "Error message for empty password field did not match expected.");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class LoginTest extends BaseTest {
         loginForm.clickButtonLogin();
 
         String expected = String.format(LoginExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_AT, invalidEmail);
-        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage(),  "Error message for missing '@' symbol in email did not match expected.");
     }
 
     @Test
@@ -80,7 +80,7 @@ public class LoginTest extends BaseTest {
         loginForm.sendKeysLogin(DataGenerator.generateValidEmail());
         loginForm.clickButtonLogin();
 
-        Assertions.assertEquals(LoginExpectedMessages.EMPTY_PASSWORD_FIELD_ERROR, loginForm.getEmptyPasswordError());
+        Assertions.assertEquals(LoginExpectedMessages.EMPTY_PASSWORD_FIELD_ERROR, loginForm.getEmptyPasswordError(), "Error message for empty password field did not match expected.");
     }
 
     @Test
@@ -92,7 +92,7 @@ public class LoginTest extends BaseTest {
         loginForm.fillLoginForm("", DataGenerator.generateValidPassword());
         loginForm.clickButtonLogin();
 
-        Assertions.assertEquals(LoginExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, loginForm.getEmptyEmailError());
+        Assertions.assertEquals(LoginExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, loginForm.getEmptyEmailError(), "Error message for empty email field did not match expected.");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class LoginTest extends BaseTest {
         loginForm.clickButtonLogin();
 
         String expected = String.format(LoginExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_BEFORE_AT, invalidEmail);
-        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage(),  "Error message for missing part before '@' in email did not match expected.");
     }
 
     @Test
@@ -122,7 +122,7 @@ public class LoginTest extends BaseTest {
         loginForm.clickButtonLogin();
 
         String expected = String.format(LoginExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_AFTER_AT, invalidEmail);
-        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, loginForm.getEmailValidationMessage(),  "Error message for missing part after '@' in email did not match expected.");
     }
 
     @Test
@@ -136,7 +136,7 @@ public class LoginTest extends BaseTest {
         loginForm.sendKeysPassword(DataGenerator.generateValidPassword());
         loginForm.clickButtonLogin();
 
-        Assertions.assertEquals(LoginExpectedMessages.INCORRECT_EMAIL_ADDRESS_ERROR, loginForm.getIncorrectEmailError());
+        Assertions.assertEquals(LoginExpectedMessages.INCORRECT_EMAIL_ADDRESS_ERROR, loginForm.getIncorrectEmailError(),  "Error message for incorrect email address did not match expected.");
     }
 
     @Test
@@ -149,7 +149,7 @@ public class LoginTest extends BaseTest {
         loginForm.sendKeysPassword(DataGenerator.generateValidPassword());
         loginForm.clickButtonLogin();
 
-        Assertions.assertEquals(LoginExpectedMessages.UNREGISTERED_CREDENTIALS_ERROR, loginForm.getLoginCredentialsError());
+        Assertions.assertEquals(LoginExpectedMessages.UNREGISTERED_CREDENTIALS_ERROR, loginForm.getLoginCredentialsError(),  "Error message for unregistered credentials did not match expected.");
     }
 
     @Test
@@ -160,7 +160,7 @@ public class LoginTest extends BaseTest {
     public void RestorePasswordFormRedirectionTest() {
         loginForm.clickRestorePasswordLink();
 
-        Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_TEXT, loginForm.getRestorePasswordFormTitleText());
+        Assertions.assertEquals(LoginExpectedMessages.RESTORE_PASSWORD_TEXT, loginForm.getRestorePasswordFormTitleText(), "Expected text on restore password form after redirection did not match.");
     }
 
     @Test
@@ -171,6 +171,6 @@ public class LoginTest extends BaseTest {
     public void RegistrationFormRedirectionTest() {
         loginForm.clickTabRegistration();
 
-        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_BUTTON_TEXT, loginForm.getTitleRegistrationTab());
+        Assertions.assertEquals(LoginExpectedMessages.REGISTRATION_BUTTON_TEXT, loginForm.getTitleRegistrationTab(),  "Expected text on registration form after redirection did not match.");
     }
 }

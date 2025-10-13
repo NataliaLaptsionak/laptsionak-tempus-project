@@ -1,10 +1,10 @@
 package by.tempus.ui.cart.page;
 
-import by.tempus.web.driver.WebDriver;
+import by.tempus.utils.JavaScriptExecutor;
+import by.tempus.web.driver.Browser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,83 +20,76 @@ public class CartPage {
 
     public void clickWatchButton() {
         logger.info("Нажатие на кнопку 'Часы'");
-        WebDriver.clickElement(CartPageLocators.WATCH_BUTTON);
+        Browser.clickElement(CartPageLocators.WATCH_BUTTON);
         logger.debug("Кнопка 'Часы' нажата.");
     }
 
     public void clickWomenCategory() {
         logger.info("Выбор категории 'Женские'");
-        WebDriver.clickElement(CartPageLocators.CATEGORY_WOMEN);
+        Browser.clickElement(CartPageLocators.CATEGORY_WOMEN);
         logger.debug("Категория 'Женские' выбрана.");
     }
 
     public void selectFirstMichaelKorsWatch() {
         logger.info("Нажатие на товар Michael Kors Lennox MK7337.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7337)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Товар Michael Kors Lennox MK7337 нажат.");
     }
 
     public void selectSecondMichaelKorsWatch() {
         logger.info("Нажатие на товар Michael Kors Runway MK7325.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.PRODUCT_MICHAEL_KORS_MK7325)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("товар Michael Kors Runway MK7325 нажат.");
     }
 
-    public CartPage clickAddToCart() {
+    public void clickAddToCart() {
         logger.info("Нажатие на кнопку 'Добавить в корзину'.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ADD_TO_CART_BUTTON)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Кнопка 'Добавить в корзину' нажата.");
-        return this;
     }
 
     public void openCart() {
         logger.info("Открытие корзины.");
-        WebDriver.clickElement(CartPageLocators.HEADER_CART_ICON);
+        Browser.clickElement(CartPageLocators.HEADER_CART_ICON);
         logger.debug("Корзина открыта.");
     }
 
     public void increaseQuantity() {
         logger.info("Увеличение количества товара в корзине.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ITEM_INCREASE_QUANTITY_BUTTON)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Количество товара увеличено.");
     }
 
     public void decreaseQuantity() {
         logger.info("Уменьшение количества товара в корзине.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.ITEM_DECREASE_QUANTITY_BUTTON)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Количество товара уменьшено.");
     }
 
     public void clearCart() {
         logger.info("Нажатие на кнопку 'Очистить корзину'.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(15));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CartPageLocators.CLEAR_CART_BUTTON)));
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        js.executeScript("arguments[0].click();", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].click();", element);
         logger.debug("Кнопка 'Очистить корзину' нажата.");
     }
 
     public int getCartItemCount() {
         logger.info("Получение количества товаров в корзине.");
-        WebDriverWait wait = new WebDriverWait(WebDriver.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), Duration.ofSeconds(10));
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(CartPageLocators.CART_ITEMS_LIST)));
-            return WebDriver.getDriver().findElements(By.xpath(CartPageLocators.CART_ITEMS_LIST)).size();
+            return Browser.getDriver().findElements(By.xpath(CartPageLocators.CART_ITEMS_LIST)).size();
         } catch (Exception e) {
             logger.warn("Не удалось получить количество товаров из корзины. Возвращаем 0. Ошибка: {}", e.getMessage());
             return 0;
@@ -105,11 +98,11 @@ public class CartPage {
 
     public String getItemQuantity() {
         logger.info("Получение текстового количества товаров в корзине.");
-        return WebDriver.findElement(CartPageLocators.ITEM_QUANTITY_INPUT).getAttribute("value");
+        return Browser.findElement(CartPageLocators.ITEM_QUANTITY_INPUT).getAttribute("value");
     }
 
     public String getEmptyCartMessageText() {
         logger.info("Получение сообщения о пустой корзине.");
-        return WebDriver.getTextFromElement(CartPageLocators.EMPTY_CART_MESSAGE);
+        return Browser.getTextFromElement(CartPageLocators.EMPTY_CART_MESSAGE);
     }
 }

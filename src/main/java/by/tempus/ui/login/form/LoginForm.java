@@ -1,6 +1,6 @@
 package by.tempus.ui.login.form;
 
-import by.tempus.web.driver.WebDriver;
+import by.tempus.web.driver.Browser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,78 +16,78 @@ public class LoginForm {
 
     public String getLoginFormTitleText() {
         logger.info("Получение заголовка формы входа.");
-        return WebDriver.getTextFromElement(LoginPageLocators.LOGIN_FORM_TITLE);
+        return Browser.getTextFromElement(LoginPageLocators.LOGIN_FORM_TITLE);
     }
 
     public String getLabelEmailText() {
         logger.info("Получение наименования поля ввода Email.");
-        return WebDriver.getTextFromElement(LoginPageLocators.LABEL_EMAIL_TEXT);
+        return Browser.getTextFromElement(LoginPageLocators.LABEL_EMAIL_TEXT);
     }
 
     public String getButtonLoginText() {
         logger.info("Получение текста кнопки 'Войти'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.BUTTON_LOGIN);
+        return Browser.getTextFromElement(LoginPageLocators.BUTTON_LOGIN);
     }
 
     public String getLinkRestorePasswordText() {
         logger.info("Получение текста ссылки 'Восстановить пароль'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.LINK_RESTORE_PASSWORD);
+        return Browser.getTextFromElement(LoginPageLocators.LINK_RESTORE_PASSWORD);
     }
 
     public void sendKeysLogin(String login) {
         logger.info("Ввод логина '{}' в поле Email.", login);
-        WebDriver.sendkeysToElement(LoginPageLocators.INPUT_LOGIN_EMAIL, login);
+        Browser.sendKeysToElement(LoginPageLocators.INPUT_LOGIN_EMAIL, login);
         logger.debug("Логин '{}' введен.", login);
     }
 
     public void sendKeysPassword(String password) {
         logger.info("Ввод пароля в поле Пароль.");
-        WebDriver.sendkeysToElement(LoginPageLocators.INPUT_LOGIN_PASSWORD, password);
+        Browser.sendKeysToElement(LoginPageLocators.INPUT_LOGIN_PASSWORD, password);
         logger.debug("Пароль введен.");
     }
 
     public void clickButtonLogin() {
         logger.info("Нажатие на кнопку 'Войти'.");
-        WebDriver.clickElement(LoginPageLocators.BUTTON_LOGIN);
+        Browser.clickElement(LoginPageLocators.BUTTON_LOGIN);
         logger.debug("Кнопка 'Войти' нажата.");
     }
 
     public String getLabelPasswordText() {
         logger.info("Получение наименования поля 'Пароль'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.LABEL_PASSWORD_TEXT);
+        return Browser.getTextFromElement(LoginPageLocators.LABEL_PASSWORD_TEXT);
     }
 
     public void clickTabRegistration() {
         logger.info("Нажатие на вкладку 'Регистрация'.");
-        WebDriver.clickElement(LoginPageLocators.TAB_REGISTRATION);
+        Browser.clickElement(LoginPageLocators.TAB_REGISTRATION);
         logger.debug("Вкладка 'Регистрация' нажата.");
     }
 
     public String getEmptyEmailError() {
         logger.info("Получение сообщения об ошибке в случае незаполненного поля Email.");
-        return WebDriver.getTextFromElement(LoginPageLocators.EMPTY_EMAIL_ERROR);
+        return Browser.getTextFromElement(LoginPageLocators.EMPTY_EMAIL_ERROR);
     }
 
     public String getEmptyPasswordError() {
         logger.info("Получение сообщения об ошибке  случае незаполненного поля пароля.");
-        return WebDriver.getTextFromElement(LoginPageLocators.EMPTY_PASSWORD_ERROR);
+        return Browser.getTextFromElement(LoginPageLocators.EMPTY_PASSWORD_ERROR);
     }
 
     public String getLoginCredentialsError() {
         logger.info("Получение сообщения об ошибке учетных данных.");
-        return WebDriver.getTextFromElement(LoginPageLocators.LOGIN_CREDENTIALS_ERROR);
+        return Browser.getTextFromElement(LoginPageLocators.LOGIN_CREDENTIALS_ERROR);
     }
 
     public String getEmailValidationMessage() {
         logger.info("Получение сообщения валидации для поля Email.");
-        JavascriptExecutor js = (JavascriptExecutor) WebDriver.getDriver();
-        WebElement emailField = WebDriver.findElement(LoginPageLocators.INPUT_LOGIN_EMAIL);
+        JavascriptExecutor js = (JavascriptExecutor) Browser.getDriver();
+        WebElement emailField = Browser.findElement(LoginPageLocators.INPUT_LOGIN_EMAIL);
         return (String) js.executeScript("return arguments[0].validationMessage;", emailField);
     }
 
     public String getIncorrectEmailError() {
         logger.info("Получение сообщения об ошибке в случае ввода некорректного Email.");
-        return WebDriver.getTextFromElement(LoginPageLocators.EMPTY_EMAIL_ERROR);
+        return Browser.getTextFromElement(LoginPageLocators.EMPTY_EMAIL_ERROR);
     }
 
     public void fillLoginForm(String login, String password) {
@@ -100,17 +100,17 @@ public class LoginForm {
 
     public void clickRestorePasswordLink() {
         logger.info("Нажатие на ссылку 'Восстановить пароль'.");
-        WebDriver.clickElement(LoginPageLocators.LINK_RESTORE_PASSWORD);
+        Browser.clickElement(LoginPageLocators.LINK_RESTORE_PASSWORD);
         logger.debug("Ссылка 'Восстановить пароль' нажата.");
     }
 
     public String getRestorePasswordFormTitleText() {
         logger.info("Получение текста заголовка 'Восстановить пароль'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.RESTORE_PASSWORD_FORM_TITLE_TEXT);
+        return Browser.getTextFromElement(LoginPageLocators.RESTORE_PASSWORD_FORM_TITLE_TEXT);
     }
 
     public String getTitleRegistrationTab() {
         logger.info("Получение заголовка вкладки 'Регистрация'.");
-        return WebDriver.getTextFromElement(LoginPageLocators.TAB_REGISTRATION);
+        return Browser.getTextFromElement(LoginPageLocators.TAB_REGISTRATION);
     }
 }

@@ -1,6 +1,6 @@
 package by.tempus.ui.search.form;
 
-import by.tempus.web.driver.WebDriver;
+import by.tempus.web.driver.Browser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
@@ -10,7 +10,7 @@ public class SearchForm {
 
     public void sendKeysSearchInput(String text) {
         logger.info("Ввод текста в поле поиска: {}", text);
-        WebDriver.sendkeysToElement(SearchFormLocators.INPUT_SEARCH, text + Keys.ENTER);
+        Browser.sendKeysToElement(SearchFormLocators.INPUT_SEARCH, text + Keys.ENTER);
     }
 
     public void searchFor(String text) {
@@ -20,16 +20,16 @@ public class SearchForm {
 
     public String getSpecificSearchResultText(String expectedText) {
         logger.info("Получение результата поиска: {}", expectedText);
-        return WebDriver.getTextFromElement(SearchFormLocators.TITLE_FULL_NAME_SEARCH_RESULT);
+        return Browser.getTextFromElement(SearchFormLocators.TITLE_FULL_NAME_SEARCH_RESULT);
     }
 
     public String getPartialNameSearchResultText() {
         logger.info("Получение текста  результата поиска.");
-        return WebDriver.getTextFromElement(SearchFormLocators.TITLE_PARTIAL_NAME_SEARCH_RESULT);
+        return Browser.getTextFromElement(SearchFormLocators.TITLE_PARTIAL_NAME_SEARCH_RESULT);
     }
 
     public String getNoResultsMessageText() {
         logger.info("Получение сообщения об отсутствии результатов поиска.");
-        return WebDriver.getTextFromElement(SearchFormLocators.TITLE_NO_RESULTS);
+        return Browser.getTextFromElement(SearchFormLocators.TITLE_NO_RESULTS);
     }
 }

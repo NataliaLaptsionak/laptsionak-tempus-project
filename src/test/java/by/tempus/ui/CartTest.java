@@ -29,7 +29,8 @@ public class CartTest extends BaseTest {
     public void viewEmptyCartTest() {
         cartPage.openCart();
 
-        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
+        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText(),
+                "Expected empty cart message did not match actual message.");
     }
 
     @Test
@@ -48,7 +49,8 @@ public class CartTest extends BaseTest {
         cartPage.clickAddToCart();
         cartPage.openCart();
 
-        Assertions.assertEquals(2, cartPage.getCartItemCount());
+        Assertions.assertEquals(2, cartPage.getCartItemCount(),
+                "Expected cart to contain 2 items, but actual count was different");
     }
 
     @Test
@@ -63,17 +65,17 @@ public class CartTest extends BaseTest {
         cartPage.clickAddToCart();
         cartPage.openCart();
 
-        Assertions.assertEquals("1", cartPage.getItemQuantity());
+        Assertions.assertEquals("1", cartPage.getItemQuantity(), "Expected item quantity to be 1 after initial increase, but was different");
 
         cartPage.increaseQuantity();
         sleep(1000);
 
-        Assertions.assertEquals("2", cartPage.getItemQuantity());
+        Assertions.assertEquals("2", cartPage.getItemQuantity(), "Expected item quantity to be 2 after second increase, but was different");
 
         cartPage.decreaseQuantity();
         sleep(1000);
 
-        Assertions.assertEquals("1", cartPage.getItemQuantity());
+        Assertions.assertEquals("1", cartPage.getItemQuantity(), "Expected item quantity to be 1 after initial increase, but was different");
     }
 
     @Test
@@ -90,6 +92,6 @@ public class CartTest extends BaseTest {
         cartPage.clearCart();
         cartPage.openCart();
 
-        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText());
+        Assertions.assertEquals(CartPageExpectedMessages.EMPTY_CART_MESSAGE, cartPage.getEmptyCartMessageText(), "Expected empty cart message after clearing did not match actual message");
     }
 }

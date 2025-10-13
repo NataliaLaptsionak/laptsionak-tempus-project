@@ -28,7 +28,7 @@ public class RegistrationTest extends BaseTest {
     @Description("Checks that the registration form displays the correct title.")
     @Severity(SeverityLevel.TRIVIAL)
     public void verifyRegistrationFormTitle() {
-        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab());
+        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab(),  "Registration form title did not match expected value.");
     }
 
     @Test
@@ -37,14 +37,14 @@ public class RegistrationTest extends BaseTest {
     @Description("Checks that all required fields are present on the registration form.")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyLRegistrationFormFields() {
-        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab());
-        Assertions.assertEquals(RegistrationExpectedMessages.FULL_NAME_FIELD_LABEL, registrationForm.getLabelFulNameFieldText());
-        Assertions.assertEquals(RegistrationExpectedMessages.EMAIL_FIELD_LABEL, registrationForm.getLabelEmailFieldText());
-        Assertions.assertEquals(RegistrationExpectedMessages.PHONE_FIELD_LABEL, registrationForm.getLabelPhoneFieldText());
-        Assertions.assertEquals(RegistrationExpectedMessages.PASSWORD_FIELD_LABEL, registrationForm.getLabelPasswordFieldText());
-        Assertions.assertEquals(RegistrationExpectedMessages.REPEAT_PASSWORD_FIELD_LABEL, registrationForm.getLabelRepeatPasswordFieldText());
-        Assertions.assertEquals(RegistrationExpectedMessages.AGREEMENT_CHECKBOX_LABEL, registrationForm.getLabelAgreementCheckboxText());
-        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_BUTTON_TEXT, registrationForm.getButtonRegistrationText());
+        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, registrationForm.getTitleRegistrationTab(), "Registration tab title text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.FULL_NAME_FIELD_LABEL, registrationForm.getLabelFulNameFieldText(),  "Full name field label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.EMAIL_FIELD_LABEL, registrationForm.getLabelEmailFieldText(), "Email field label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.PHONE_FIELD_LABEL, registrationForm.getLabelPhoneFieldText(), "Phone field label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.PASSWORD_FIELD_LABEL, registrationForm.getLabelPasswordFieldText(), "Password field label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.REPEAT_PASSWORD_FIELD_LABEL, registrationForm.getLabelRepeatPasswordFieldText(), "Repeat password field label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.AGREEMENT_CHECKBOX_LABEL, registrationForm.getLabelAgreementCheckboxText(), "Agreement checkbox label text is incorrect.");
+        Assertions.assertEquals(RegistrationExpectedMessages.REGISTRATION_BUTTON_TEXT, registrationForm.getButtonRegistrationText(), "Registration button text is incorrect.");
     }
 
     @Test
@@ -55,11 +55,11 @@ public class RegistrationTest extends BaseTest {
     public void verifyErrorMessagesForEmptyRegistrationFields() {
         registrationForm.clickButtonRegistration();
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError());
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_EMAIL_ERROR, registrationForm.getRegistrationEmailError());
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PHONE_ERROR, registrationForm.getRegistrationPhoneError());
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PASSWORD_ERROR, registrationForm.getRegistrationPasswordError());
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_CHECKBOX_ERROR, registrationForm.getAgreementCheckboxError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError(), "Error message for empty Full Name field did not match expected.");
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_EMAIL_ERROR, registrationForm.getRegistrationEmailError(),"Error message for empty Email field did not match expected.");
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PHONE_ERROR, registrationForm.getRegistrationPhoneError(), "Error message for empty Phone field did not match expected.");
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PASSWORD_ERROR, registrationForm.getRegistrationPasswordError(), "Error message for empty Password field did not match expected.");
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_CHECKBOX_ERROR, registrationForm.getAgreementCheckboxError(),  "Error message for unchecked agreement checkbox did not match expected.");
     }
 
     @Test
@@ -70,7 +70,7 @@ public class RegistrationTest extends BaseTest {
     public void verifyErrorMessageForEmptyFullNameField() {
         registrationForm.fillRegistrationForm("", DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_FULL_NAME_ERROR, registrationForm.getRegistrationFullNameError(), "Error message for empty Full Name field did not match expected.");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class RegistrationTest extends BaseTest {
         registrationForm.clickAgreementCheckbox();
         registrationForm.clickButtonRegistration();
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_EMAIL_ERROR, registrationForm.getRegistrationEmailError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_EMAIL_ERROR, registrationForm.getRegistrationEmailError(), "Error message for empty Email field did not match expected.");
     }
 
     @Test
@@ -97,7 +97,7 @@ public class RegistrationTest extends BaseTest {
     public void verifyErrorMessageForEmptyPhone() {
         registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(),"",DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PHONE_ERROR, registrationForm.getRegistrationPhoneError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PHONE_ERROR, registrationForm.getRegistrationPhoneError(), "Error message for empty Phone field did not match expected.");
     }
 
     @Test
@@ -108,7 +108,7 @@ public class RegistrationTest extends BaseTest {
     public void verifyErrorMessageForEmptyPassword() {
         registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),"", DataGenerator.generateValidRepeatPassword());
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PASSWORD_ERROR, registrationForm.getRegistrationPasswordError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_PASSWORD_ERROR, registrationForm.getRegistrationPasswordError(), "Error message for empty Password field did not match expected.");
     }
 
     @Test
@@ -119,7 +119,7 @@ public class RegistrationTest extends BaseTest {
     public void verifyErrorMessageForEmptyRepeatPassword() {
         registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateValidEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), "");
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_REPEAT_PASSWORD_ERROR, registrationForm.getRegistrationRepeatPasswordError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_REPEAT_PASSWORD_ERROR, registrationForm.getRegistrationRepeatPasswordError(), "Error message for empty Repeat Password field did not match expected.");
     }
 
     @Test
@@ -135,7 +135,7 @@ public class RegistrationTest extends BaseTest {
         registrationForm.sendKeysRepeatPassword(DataGenerator.generateValidPassword());
         registrationForm.clickButtonRegistration();
 
-        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_CHECKBOX_ERROR, registrationForm.getAgreementCheckboxError());
+        Assertions.assertEquals(RegistrationExpectedMessages.EMPTY_CHECKBOX_ERROR, registrationForm.getAgreementCheckboxError(), "Error message for unchecked Agreement checkbox did not match expected.");
     }
 
     @Test
@@ -144,11 +144,11 @@ public class RegistrationTest extends BaseTest {
     @Description("Tests that an error message is shown for an email missing the part before the '@' symbol.")
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartBeforeAtTest() {
-        String invalidEmail = DataGenerator.generateInvalidEmailMissingPartBeforeAt();
-        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingPartBeforeAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
+        String invalidEmail  = DataGenerator.generateInvalidEmailMissingPartBeforeAt();
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), invalidEmail, DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_BEFORE_AT, invalidEmail);
-        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());
+        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage(), "Error message for missing part before '@' in email did not match expected.");
     }
 
     @Test
@@ -158,10 +158,10 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void invalidEmailFormatMissingPartAfterAtTest() {
         String invalidEmail = DataGenerator.generateInvalidEmailMissingPartAfterAt();
-        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingPartAfterAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
+        registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), invalidEmail, DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_AFTER_AT, invalidEmail);
-        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());
+        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage(), "Error message for missing part after '@' in email did not match expected.");
     }
 
     @Test
@@ -172,7 +172,7 @@ public class RegistrationTest extends BaseTest {
     public void incorrectEmailAddressTest() {
         registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateIncorrectEmail(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
-        Assertions.assertEquals(RegistrationExpectedMessages.INCORRECT_EMAIL_ERROR, registrationForm.getIncorrectEmailError());
+        Assertions.assertEquals(RegistrationExpectedMessages.INCORRECT_EMAIL_ERROR, registrationForm.getIncorrectEmailError(), "Error message for incorrect email address did not match expected.");
     }
 
     @Test
@@ -185,6 +185,6 @@ public class RegistrationTest extends BaseTest {
         registrationForm.fillRegistrationForm(DataGenerator.generateValidFullName(), DataGenerator.generateInvalidEmailMissingAt(), DataGenerator.generateValidBelarusianPhoneNumber(),DataGenerator.generateValidPassword(), DataGenerator.generateValidRepeatPassword());
 
         String expected = String.format(RegistrationExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_AT, invalidEmail);
-        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage());
+        Assertions.assertEquals(expected, registrationForm.getRegistrationEmailValidationMessage(), "Error message for missing '@' symbol in email did not match expected.");
     }
 }

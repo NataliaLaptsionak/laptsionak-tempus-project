@@ -1,5 +1,6 @@
 package by.tempus.web.driver;
 
+import by.tempus.utils.JavaScriptExecutor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,20 +8,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class WebDriver {
-    public static org.openqa.selenium.WebDriver driver;
+public class Browser {
+    private static final int AMOUNT_OF_WAIT = 10;
+    private static WebDriver driver;
     public static WebDriverWait wait;
 
-    public static org.openqa.selenium.WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver == null) {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
         }
         return driver;
     }
 
-    public static org.openqa.selenium.WebDriver getInstance() {
+    public static WebDriver getInstance() {
         return driver;
     }
 
@@ -32,11 +33,11 @@ public class WebDriver {
     }
 
     public static WebElement findElement(String xpath) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(AMOUNT_OF_WAIT));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 
-    public static void sendkeysToElement(String xpath, String value) {
+    public static void sendKeysToElement(String xpath, String value) {
         WebElement element = findElement(xpath);
         element.clear();
         element.sendKeys(value);
@@ -49,14 +50,14 @@ public class WebDriver {
     }
 
     public static void scrollToElement(String xpath) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(AMOUNT_OF_WAIT));
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(org.openqa.selenium.By.xpath(xpath)));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public static void clickElement(String xpath) {
         WebElement element = findElement(xpath);
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        JavaScriptExecutor.getJavaScriptExecutor("arguments[0].scrollIntoView(true);", element);
         element.click();
     }
 }

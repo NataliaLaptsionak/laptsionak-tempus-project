@@ -35,7 +35,7 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Checks that clicking the 'Restore password' link navigates to the restore password form.")
     @Severity(SeverityLevel.CRITICAL)
     void RestorePasswordFormRedirectionTest() {
-        assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText());
+        assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText(), "Expected restore password form title did not match actual title after redirection.");
     }
 
     @Test
@@ -44,11 +44,11 @@ public class RestorePasswordTest extends BaseTest {
     @Description("Checks that essential elements like titles, labels, and buttons are present on the restore password form.")
     @Severity(SeverityLevel.NORMAL)
     public void verifyRestorePasswordFormFields() {
-        assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, restorePasswordForm.getLoginFormTitleText());
-        assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText());
-        assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText());
-        assertEquals(RestorePasswordExpectedMessages.LABEL_EMAIL_TEXT, restorePasswordForm.getLabelRestorePassword_EmailText());
-        assertEquals(RestorePasswordExpectedMessages.BUTTON_RESTORE_TEXT, restorePasswordForm.getButtonSubmitRestoreText());
+        assertEquals(LoginExpectedMessages.LOGIN_FORM_TITLE, restorePasswordForm.getLoginFormTitleText(),  "Login form title text is incorrect on restore password form.");
+        assertEquals(LoginExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText(), "Registration form title text is incorrect on restore password form.");
+        assertEquals(RestorePasswordExpectedMessages.RESTORE_PASSWORD_FORM_TEXT, restorePasswordForm.getRestorePasswordFormText(), "Restore password form title text is incorrect.");
+        assertEquals(RestorePasswordExpectedMessages.LABEL_EMAIL_TEXT, restorePasswordForm.getLabelRestorePassword_EmailText(), "Email field label text is incorrect on restore password form.");
+        assertEquals(RestorePasswordExpectedMessages.BUTTON_RESTORE_TEXT, restorePasswordForm.getButtonSubmitRestoreText(), "Submit restore button text is incorrect on restore password form.");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class RestorePasswordTest extends BaseTest {
     public void verifyErrorMessageForEmptyEmailField() {
         restorePasswordForm.clickButtonSubmitRestore();
 
-        assertEquals(RestorePasswordExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, restorePasswordForm.getRestorePasswordFormEmailError());
+        assertEquals(RestorePasswordExpectedMessages.EMPTY_EMAIL_FIELD_ERROR, restorePasswordForm.getRestorePasswordFormEmailError(), "Error message for empty email field did not match expected on restore password form.");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class RestorePasswordTest extends BaseTest {
         restorePasswordForm.clickButtonSubmitRestore();
 
         String expected = String.format(RestorePasswordExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_AT, invalidEmail);
-        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage(), "Error message for missing '@' symbol in email did not match expected on restore password form.");
     }
 
     @Test
@@ -88,7 +88,7 @@ public class RestorePasswordTest extends BaseTest {
         restorePasswordForm.clickButtonSubmitRestore();
 
         String expected = String.format(RestorePasswordExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_BEFORE_AT, invalidEmail);
-        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage(), "Error message for missing part before '@' in email did not match expected on restore password form.");
     }
 
     @Test
@@ -102,7 +102,7 @@ public class RestorePasswordTest extends BaseTest {
         restorePasswordForm.clickButtonSubmitRestore();
 
         String expected = String.format(RestorePasswordExpectedMessages.INVALID_EMAIL_FORMAT_ERROR_MISSING_PART_AFTER_AT, invalidEmail);
-        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage());
+        Assertions.assertEquals(expected, restorePasswordForm.getEmailValidationMessage(), "Error message for missing part after '@' in email did not match expected on restore password form.");
     }
 
     @Test
@@ -115,7 +115,7 @@ public class RestorePasswordTest extends BaseTest {
         restorePasswordForm.sendKeysEmail(invalidEmail);
         restorePasswordForm.clickButtonSubmitRestore();
 
-        Assertions.assertEquals(RestorePasswordExpectedMessages.INCORRECT_EMAIL_ADDRESS_ERROR, loginForm.getIncorrectEmailError());
+        Assertions.assertEquals(RestorePasswordExpectedMessages.INCORRECT_EMAIL_ADDRESS_ERROR, loginForm.getIncorrectEmailError(), "Error message for incorrect email address did not match expected on restore password form.");
     }
 
     @Test
@@ -127,7 +127,7 @@ public class RestorePasswordTest extends BaseTest {
         restorePasswordForm.sendKeysEmail(DataGenerator.generateValidEmail());
         restorePasswordForm.clickButtonSubmitRestore();
 
-        Assertions.assertEquals(RestorePasswordExpectedMessages.UNREGISTERED_EMAIL_MESSAGE, restorePasswordForm.getRestorePasswordUnregisteredEmailError());
+        Assertions.assertEquals(RestorePasswordExpectedMessages.UNREGISTERED_EMAIL_MESSAGE, restorePasswordForm.getRestorePasswordUnregisteredEmailError(), "Error message for unregistered email did not match expected on restore password form.");
     }
 
     @Test
@@ -138,6 +138,6 @@ public class RestorePasswordTest extends BaseTest {
     public void RegistrationFormRedirectionTest() {
         restorePasswordForm.clickTabRegistration();
 
-        assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText());
+        assertEquals(RegistrationExpectedMessages.REGISTRATION_TAB_TITLE, restorePasswordForm.getTitleRegistrationFormText(), "Expected registration form title did not match actual title after redirection from restore password form.");
     }
 }
